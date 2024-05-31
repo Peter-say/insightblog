@@ -21,6 +21,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
+      
         $user = Auth::user();
         if ($user->role === 'Admin' || $user->role === 'Moderator') {
             $blogs = BlogPost::with('category')->paginate(30);
@@ -34,8 +35,9 @@ class BlogPostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(BlogPost $id)
     {
+        $this->authorize('create', $id);
         $categories = BlogCategory::where('status', 'active')->get();
         return view('dashboard.blog.create', [
             'categories' => $categories,
@@ -52,7 +54,7 @@ class BlogPostController extends Controller
             $coverImagePath = '';
 
             if ($request->hasFile('cover_image')) {
-                $coverImageDirectory = 'blog/cover_images';
+                $coverImageDirectory = 'blog/images';
                 Storage::disk('public')->makeDirectory($coverImageDirectory);
                 $coverImagePath = basename(FileHelpers::saveImageRequest($request->file('cover_image'), $coverImageDirectory));
             }
@@ -81,6 +83,7 @@ class BlogPostController extends Controller
      */
     public function edit(string $id)
     {
+      
         $blog = BlogPost::findOrFail($id);
         $categories = BlogCategory::where('status', 'active')->get();
         return view('dashboard.blog.edit', [
@@ -92,21 +95,22 @@ class BlogPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBlogPostRequest $request, string $id)
+    public function update(UpdateBlogPostRequest $request, BlogPost $id)
     {
+        $this->authorize('update', $id);
         try {
             $blogPost = BlogPost::findOrFail($id);
             $data = $request->all();
 
             if ($request->hasFile('cover_image')) {
-                $coverImageDirectory = 'blog/cover_images';
+                $coverImageDirectory = 'blog/images';
                 Storage::disk('public')->makeDirectory($coverImageDirectory);
                 $coverImagePath = basename(FileHelpers::saveImageRequest($request->file('cover_image'), $coverImageDirectory));
                 $data['cover_image'] = $coverImagePath;
 
 
                 if ($blogPost->cover_image) {
-                    Storage::disk('public')->delete('blog/cover_images/' . $blogPost->cover_image);
+                    Storage::disk('public')->delete('blog/images/' . $blogPost->cover_image);
                 }
             }
 
@@ -128,6 +132,8 @@ class BlogPostController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('update', $id);
+
        $blog = BlogPost::findOrFail($id);
        $blog->delete();
        return back()->with('success_message', 'Blog deleted successfully');

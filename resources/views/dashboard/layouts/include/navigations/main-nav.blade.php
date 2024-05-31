@@ -52,26 +52,32 @@
                             </div>
                         </a>
 
-                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.blog.index') }}"
-                            role="button">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Blog</span>
-                            </div>
-                        </a><!-- parent pages-->
-                        <!-- parent pages--><a class="nav-link" href="#" role="button">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        class="fab fa-trello"></span></span><span
-                                    class="nav-link-text ps-1">Comments</span>
-                            </div>
-                        </a>
-                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.users') }}" role="button">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Manage
-                                    Users</span>
-                            </div>
-                        </a>
-
-
+                        @can('manage-blogs')
+                            <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.blog.index') }}"
+                                role="button">
+                                <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                            class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Blog</span>
+                                </div>
+                            </a>
+                        @endcan
+                        <!-- parent pages-->
+                        @can('manage-comments')
+                            <!-- parent pages--><a class="nav-link" href="#" role="button">
+                                <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                            class="fab fa-trello"></span></span><span
+                                        class="nav-link-text ps-1">Comments</span>
+                                </div>
+                            </a>
+                        @endcan
+                        @can('manage-users')
+                            <!-- parent pages-->
+                            <a class="nav-link" href="{{ route('dashboard.users') }}" role="button">
+                                <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                            class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Manage
+                                        Users</span>
+                                </div>
+                            </a>
+                        @endcan
                 </li>
 
 

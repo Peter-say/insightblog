@@ -64,7 +64,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="body">Body:</label>
-                            @include('components.forms.tinymce-editor')
+                            <textarea name="body"  id="myeditorinstance"
+                            class="form-control @error('body') is-invalid @enderror" aria cols="30" rows="10">{{ old('body') }}</textarea>
+                                                
                             @error('body')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

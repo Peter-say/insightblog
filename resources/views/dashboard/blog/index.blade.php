@@ -91,11 +91,11 @@
                                         <div class="d-flex justify-content-between">
                                             <a href="{{ route('dashboard.blog.edit', $blog->id) }}"><i
                                                     class="fa fa-edit"></i></a>
-                                            <form id="delete-blog-form"
+                                            <form id="delete-blog-form-{{ $blog->id }}"
                                                 action="{{ route('dashboard.blog.destroy', $blog->id) }}" method="post">
                                                 @csrf @method('DELETE')
                                             </form>
-                                            <a onclick="confirmDelete()"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" onclick="confirmDelete({{ $blog->id }})"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                     </tr>
@@ -120,30 +120,19 @@
         </div>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            // Search for blogs by other criteria
-            $('#search_blogs').on('keyup', function() {
-                console.log('typing');
-                var searchValue = $(this).val(); // Get the search value
-                fetchSearchResults(searchValue); // Call the function with the search value
-            });
-
-            function fetchSearchResults(searchValue) {
-                $.ajax({
-                    url: "{{ route('dashboard.search.blogs') }}",
-                    method: 'GET',
-                    data: {
-                        search_blogs: searchValue
-                    }, // Pass the search value
-                    success: function(response) {
-                        // Update the HTML content of blogs-table
-                        $('#blogs-table').html(response.html); // Update HTML content
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
+        function confirmDelete(blogId) {
+            if (confirm('Are you sure you want to delete this blog?')) {
+                document.getElementById('delete-blog-form-' + blogId).submit();
             }
+        }
+
+        window.addEventListener('load', function() {
+            const appUrl = '{{ config('app.url') }}';
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('change', function() {
+                    this.submit();
+                });
+            });
         });
     </script>
 @endsection

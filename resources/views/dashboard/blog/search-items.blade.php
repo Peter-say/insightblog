@@ -28,13 +28,13 @@
                     <td class="text-nowrap">{{ $blog->category->name }}</td>
                     <td class="text-nowrap">{{ $blog->title }}</td>
                     <td class="text-nowrap">{{ Str::limit(html_entity_decode(strip_tags($blog->body)), 50) }}</td>
+
                     <td class="text-nowrap">
-                        {{ $blog->published_at ? $blog->created_at->format('Y-m-d') : 'N/A' }}</td>
+                        {{ $blog->published_at ?? 'N/A' }}</td>
                     <td class="text-nowrap">{{ $blog->view_count }}</td>
                     <td class="text-nowrap">{{ $blog->is_trending ? 'Yes' : 'No' }}</td>
-                    <td class="text-nowrap">{{ $blog->is_featured ? 'Yes' : 'No' }}</td>
-                    @if (auth()->user()->role === 'Admin' || auth()->user()->role === 'Moderator')
-                        <td class="">
+                    <td class="text-nowrap">{{ $blog->is_featured ? 'Yes' : 'No' }}
+                        @if (auth()->user()->role === 'Admin' || auth()->user()->role === 'Moderator')
                             <form class="featured-form" method="POST"
                                 action="{{ route('dashboard.blog.featured', $blog->id) }}">
                                 @csrf @method('PUT')
@@ -48,35 +48,36 @@
                                 </label>
                                 <button type="submit">Update</button>
                             </form>
-                        </td>
-                    @endif
-                    <td class="text-end">
-                        @if ($blog->status === 'pending')
-                            <span class="badge badge-warning text-warning">Pending</span>
-                        @elseif ($blog->status === 'active')
-                            <span class="badge badge-success text-success">Active</span>
-                        @elseif ($blog->status === 'rejected')
-                            <span class="badge badge-danger text-danger">Rejected</span>
-                        @endif
                     </td>
-                    <td>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('dashboard.blog.edit', $blog->id) }}"><i class="fa fa-edit"></i></a>
-                            <form id="delete-blog-form" action="{{ route('dashboard.blog.destroy', $blog->id) }}"
-                                method="post">
-                                @csrf @method('DELETE')
-                            </form>
-                            <a onclick="confirmDelete()"><i class="fa fa-trash"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="12">
-                    <h4>No blog(s) available</h4>
-                </td>
+            @endif
+            <td class="text-end">
+                @if ($blog->status === 'pending')
+                    <span class="badge badge-warning text-warning">Pending</span>
+                @elseif ($blog->status === 'active')
+                    <span class="badge badge-success text-success">Active</span>
+                @elseif ($blog->status === 'rejected')
+                    <span class="badge badge-danger text-danger">Rejected</span>
+                @endif
+            </td>
+            <td>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('dashboard.blog.edit', $blog->id) }}"><i class="fa fa-edit"></i></a>
+                    <form id="delete-blog-form-{{ $blog->id }}"
+                        action="{{ route('dashboard.blog.destroy', $blog->id) }}" method="post">
+                        @csrf @method('DELETE')
+                    </form>
+                    <a href="javascript:void(0);" onclick="confirmDelete({{ $blog->id }})"><i
+                            class="fa fa-trash"></i></a>
+                </div>
+            </td>
             </tr>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="12">
+                <h4>No blog(s) available</h4>
+            </td>
+        </tr>
         @endif
     </tbody>
 </table>
