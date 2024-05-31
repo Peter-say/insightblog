@@ -47,7 +47,7 @@
                                             <td class="text-nowrap">{{ $user->name }}</td>
                                             <td class="text-nowrap">{{ $user->email }}</td>
 
-                                            <td class="text-nowrap">
+                                        
                                             <td class="text-nowrap">
                                                 <form action="{{ route('dashboard.user.role', $user->id) }}" method="POST">
                                                     @csrf
@@ -66,7 +66,7 @@
                                                     </select>
                                                 </form>
                                             </td>
-                                            </td>
+                                       
 
                                             <td class="text-nowrap">{{ $user->blogs->count() }} </td>
                                             <td>

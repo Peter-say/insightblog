@@ -29,7 +29,7 @@ class BlogPostPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role, ['Admin', 'Author']);
+        return in_array($user->role, ['Admin', 'Author', 'Moderator']);
     }
 
     /**
@@ -37,7 +37,7 @@ class BlogPostPolicy
      */
     public function update(User $user, BlogPost $blogPost): bool
     {
-        return $user->id === $blogPost->user_id || $user->isAdmin() || $user->isModerator();
+        return $user->id === $blogPost->user_id || $user->isAdmin() || $user->isModerator() || $user->isAuthor();
     }
 
     /**

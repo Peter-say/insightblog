@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateBlogPostRequest extends FormRequest
 {
+    protected $id;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,7 +26,7 @@ class UpdateBlogPostRequest extends FormRequest
         return [
             'category_id' => 'required|exists:blog_categories,id',
             'title' => 'required|string|max:80',
-            'slug' => 'nullable|string|url|unique:blog_posts,slug|max:80',
+            'slug' => 'nullable|string|url|max:80', Rule::unique('blog_posts', 'slug')->ignore($this->id),
             'cover_image' => 'nullable|image|mimes:png,jpg, jpeg,webp|max:2048',
             'body' => 'required|string',
             'published_at' => 'nullable|date',

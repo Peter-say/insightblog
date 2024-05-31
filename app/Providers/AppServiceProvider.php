@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->policies;
-
+        
         Gate::define('manage-users', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });
@@ -42,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->isAdmin() || $user->isModerator() || $user->isAuthor();
         });
         Gate::define('manage-comments', function (User $user) {
+            return $user->isAdmin() || $user->isModerator() || $user->isAuthor();
+        });
+
+        Gate::define('manage-settings', function (User $user) {
             return $user->isAdmin() || $user->isModerator() || $user->isAuthor();
         });
     }

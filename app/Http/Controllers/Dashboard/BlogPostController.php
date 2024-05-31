@@ -35,9 +35,9 @@ class BlogPostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(BlogPost $id)
+    public function create(BlogPost $blog_post)
     {
-        $this->authorize('create', $id);
+        $this->authorize('create', $blog_post);
         $categories = BlogCategory::where('status', 'active')->get();
         return view('dashboard.blog.create', [
             'categories' => $categories,
@@ -81,9 +81,9 @@ class BlogPostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, BlogPost $blog_post)
     {
-      
+        $this->authorize('update', $blog_post);
         $blog = BlogPost::findOrFail($id);
         $categories = BlogCategory::where('status', 'active')->get();
         return view('dashboard.blog.edit', [
@@ -95,9 +95,9 @@ class BlogPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBlogPostRequest $request, BlogPost $id)
+    public function update(UpdateBlogPostRequest $request, BlogPost $blog_post, string $id)
     {
-        $this->authorize('update', $id);
+        $this->authorize('update', $blog_post);
         try {
             $blogPost = BlogPost::findOrFail($id);
             $data = $request->all();
@@ -130,9 +130,9 @@ class BlogPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, BlogPost $blog_post)
     {
-        $this->authorize('update', $id);
+        $this->authorize('update', $blog_post);
 
        $blog = BlogPost::findOrFail($id);
        $blog->delete();
