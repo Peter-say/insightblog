@@ -38,32 +38,40 @@
     <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
         <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-              
+
                 <li class="nav-item"><!-- label-->
                     <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                       
 
-                     
-                         
-                           <!-- parent pages--><a class="nav-link" href="{{route('dashboard.home')}}" role="button">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                class="fab fa-trello"></span></span><span
-                            class="nav-link-text ps-1">Dashboard</span>
-                    </div>
-                </a>  
-                      
-                        <!-- parent pages--><a class="nav-link" href="{{route('dashboard.blog.index')}}" role="button">
+
+
+
+                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.home') }}" role="button">
                             <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                         class="fab fa-trello"></span></span><span
-                                    class="nav-link-text ps-1">Blog</span>
+                                    class="nav-link-text ps-1">Dashboard</span>
                             </div>
-                        </a><!-- parent pages--><a class="nav-link dropdown-indicator" href="#social" role="button"
-                            data-bs-toggle="collapse" aria-expanded="false" aria-controls="social">
-                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                                        class="fas fa-share-alt"></span></span><span
-                                    class="nav-link-text ps-1">Comments</span></div>
                         </a>
-                       
+
+                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.blog.index') }}"
+                            role="button">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Blog</span>
+                            </div>
+                        </a><!-- parent pages-->
+                        <!-- parent pages--><a class="nav-link" href="#" role="button">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fab fa-trello"></span></span><span
+                                    class="nav-link-text ps-1">Comments</span>
+                            </div>
+                        </a>
+                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.users') }}" role="button">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Manage
+                                    Users</span>
+                            </div>
+                        </a>
+
+
                 </li>
 
 
@@ -74,8 +82,8 @@
 </nav>
 <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand-lg" style="display: none;">
     <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button"
-        data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard"
-        aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
+        data-bs-toggle="collapse" data-bs-target="#navbarStandard" aria-controls="navbarStandard" aria-expanded="false"
+        aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                 class="toggle-line"></span></span></button>
     <a class="navbar-brand me-1 me-sm-3" href="../../../index.html">
         <div class="d-flex align-items-center"><img class="me-2"
@@ -428,7 +436,7 @@
                                 class="fas fa-crown me-1"></span><span>Go Pro</span></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#!">Set status</a>
-                        <a class="dropdown-item" href="../../../pages/user/profile.html">Profile &amp; account</a>
+                        <a class="dropdown-item" href="#!">Profile &amp; account</a>
                         <a class="dropdown-item" href="#!">Feedback</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Settings</a>

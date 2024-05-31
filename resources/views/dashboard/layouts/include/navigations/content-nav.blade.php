@@ -408,7 +408,8 @@
                                         href="../../events/event-detail.html" target="_blank">
                                         <div class="avatar avatar-2xl">
                                             <div class="avatar-name rounded-circle bg-primary-subtle text-primary">
-                                                <span class="fs-2">E</span></div>
+                                                <span class="fs-2">E</span>
+                                            </div>
                                         </div>
                                         <p class="mb-0 fw-medium text-800 text-truncate fs--2">Events</p>
                                     </a></div>
@@ -423,7 +424,13 @@
         <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="../../../assets/img/team/3-thumb.png" alt="" />
+                    @if (!empty($user->avatar))
+                        <img class="rounded-circle" src="{{ asset('storage/user/images/' . Auth()->user()->avatar) }}"
+                            alt="" />
+                    @else
+                        <img class="rounded-circle" src="{{ asset('dashboard/assets/img/team/avatar.png') }}"
+                            alt="" />
+                    @endif
                 </div>
             </a>
             <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0"
@@ -433,11 +440,17 @@
                             class="fas fa-crown me-1"></span><span>Go Pro</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#!">Set status</a>
-                    <a class="dropdown-item" href="../../../pages/user/profile.html">Profile &amp; account</a>
+                    <a class="dropdown-item" href="#!">Profile &amp; account</a>
                     <a class="dropdown-item" href="#!">Feedback</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../../../pages/user/settings.html">Settings</a>
-                    <a class="dropdown-item" href="../../../pages/authentication/card/logout.html">Logout</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </li>
@@ -459,7 +472,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     id="dashboards">Dashboard</a>
-                
+
             </li>
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="apps">App</a>
@@ -1268,7 +1281,8 @@
                                         href="../../events/event-detail.html" target="_blank">
                                         <div class="avatar avatar-2xl">
                                             <div class="avatar-name rounded-circle bg-primary-subtle text-primary">
-                                                <span class="fs-2">E</span></div>
+                                                <span class="fs-2">E</span>
+                                            </div>
                                         </div>
                                         <p class="mb-0 fw-medium text-800 text-truncate fs--2">Events</p>
                                     </a></div>

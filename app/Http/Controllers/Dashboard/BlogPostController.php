@@ -128,7 +128,9 @@ class BlogPostController extends Controller
      */
     public function destroy(string $id)
     {
-        // Add logic to delete a blog post
+       $blog = BlogPost::findOrFail($id);
+       $blog->delete();
+       return back()->with('success_message', 'Blog deleted successfully');
     }
 
     /**

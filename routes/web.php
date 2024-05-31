@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\BlogPostController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,10 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::post('blog/upload-image', [BlogPostController::class, 'uploadImage'])->name('blog.upload-image');
     Route::get('search/blogs', [BlogPostController::class, 'searchBlogs'])->name('search.blogs');
     Route::put('/blog/{id}/update-featured', [BlogPostController::class, 'updateFeatured'])->name('blog.featured');
+
+    Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::delete('user/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
+    Route::patch('user/{user}/role', [UsersController::class, 'updateRole'])->name('user.role');
 });
 
 Route::middleware('auth')->group(function () {
