@@ -7,11 +7,14 @@ use App\Http\Controllers\Dashboard\MetaDescription;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [WelcomeController::class, 'welcome']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
