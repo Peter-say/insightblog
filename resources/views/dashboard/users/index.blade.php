@@ -47,7 +47,7 @@
                                             <td class="text-nowrap">{{ $user->name }}</td>
                                             <td class="text-nowrap">{{ $user->email }}</td>
 
-                                        
+
                                             <td class="text-nowrap">
                                                 <form action="{{ route('dashboard.user.role', $user->id) }}" method="POST">
                                                     @csrf
@@ -66,22 +66,25 @@
                                                     </select>
                                                 </form>
                                             </td>
-                                       
+
 
                                             <td class="text-nowrap">{{ $user->blogs->count() }} </td>
                                             <td>
-                                                <div class="d-flex justify-content-between">
-                                                    <form id="delete-user-form-{{ $user->id }}"
-                                                        action="{{ route('dashboard.user.destroy', $user->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                    {{-- <a href="{{ route('dashboard.user.edit', $user->id) }}"><i class="fa fa-edit"></i></a> --}}
-                                                    <a href="javascript:void(0);"
-                                                        onclick="confirmDelete({{ $user->id }})"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
+                                                @if ($user->role !== 'Admin')
+                                                    <div class="d-flex justify-content-between">
+                                                        <form id="delete-user-form-{{ $user->id }}"
+                                                            action="{{ route('dashboard.user.destroy', $user->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                        {{-- <a href="{{ route('dashboard.user.edit', $user->id) }}"><i class="fa fa-edit"></i></a> --}}
+                                                        <a href="javascript:void(0);"
+                                                            onclick="confirmDelete({{ $user->id }})"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    </div>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach
