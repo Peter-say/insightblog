@@ -24,7 +24,7 @@ class StoreBlogPostRequest extends FormRequest
         return [
             'category_id' => 'required|exists:blog_categories,id',
             'title' => 'required|string|max:80',
-            'slug' => 'nullable|string|url|unique:blog_posts,slug|max:80',
+            'slug' => 'nullable|string|unique:blog_posts,slug|max:80',
             'cover_image' => 'nullable|image|mimes:png,jpg, jpeg,webp|max:2048',
             'body' => 'required|string',
             'published_at' => 'nullable|date',

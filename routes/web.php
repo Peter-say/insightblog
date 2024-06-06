@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'welcome']);
 Route::prefix('post')->as('post.')->group(function() {
-    Route::get('/details/{slug}', [IndexController::class, 'details'])->name('details');
+    Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');
     Route::get('/tags', [IndexController::class, 'tags'])->name('tags');
     Route::get('/author', [IndexController::class, 'author'])->name('author');
 });

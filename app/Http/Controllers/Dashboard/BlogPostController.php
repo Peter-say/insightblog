@@ -117,6 +117,11 @@ class BlogPostController extends Controller
             if ($request->input('published_at')) {
                 $data['published_at'] = now(); // Set published_at to current date and time
             }
+
+            if(empty($request->input('slug'))){
+                $data['slug'] = $blogPost->slug;
+            }
+
            
             $blogPost->update($data);
 
@@ -145,6 +150,10 @@ class BlogPostController extends Controller
     public function uploadImage(Request $request)
     {
         try {
+            $request->validate([
+                'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $path = $file->store('public/blog/images');
@@ -158,6 +167,7 @@ class BlogPostController extends Controller
             return response()->json(['error' => 'Upload failed'], 500);
         }
     }
+    
 
     public function updateFeatured(Request $request, $id)
     {

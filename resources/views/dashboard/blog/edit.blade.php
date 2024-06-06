@@ -212,12 +212,12 @@
 
             // Function to check if the slug already contains the app URL
             function hasAppUrl(slug) {
-                return slug.startsWith(appUrl);
+                return slug.startsWith(oldSlug);
             }
 
             // Function to generate the new slug
             function generateSlug(title) {
-                return appUrl + '/' + title.toLowerCase().trim().replace(/\s+/g, '-');
+               title.toLowerCase().trim().replace(/\s+/g, '-');
             }
 
             // Prefill the slug input when the page loads

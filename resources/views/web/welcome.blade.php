@@ -2,11 +2,8 @@
 
 @section('contents')
 
-<style>
-  .recent-blog-img{
-    height: 400px;
-  }
-</style>
+
+
     <!-- start of banner -->
     <div class="banner text-center">
         <div class="container">

@@ -23,12 +23,12 @@
     <meta name="theme-name" content="reader" />
 
     <!-- plugins -->
-    <link rel="stylesheet" href="web/plugins/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="web/plugins/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="web/plugins/slick/slick.css">
+    <link rel="stylesheet" href="../../../web/plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../web/plugins/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../../../web/plugins/slick/slick.css">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="web/css/style.css" media="screen">
+    <link rel="stylesheet" href="../../../web/css/style.css" media="screen">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="web/images/favicon.png" type="image/x-icon">
@@ -39,12 +39,29 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="" />
     <meta property="og:updated_time" content="2020-03-15T15:40:24+06:00" />
+
+    <style>
+        .recent-blog-img {
+            height: 400px;
+        }
+
+        .image-container {
+            height: 200px;
+            /* Adjust as needed */
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
 
     @include('web.layouts.header')
-
 
     @yield('contents')
 
@@ -56,22 +73,7 @@
                 stroke-width="2" />
         </svg>
 
-        <div class="instafeed text-center mb-5">
-            <h2 class="h3 mb-4">INSTAGRAM POST</h2>
 
-            <div class="instagram-slider">
-                <div class="instagram-post"><img src="web/images/instagram/1.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/2.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/4.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/3.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/2.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/1.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/3.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/4.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/2.jpg"></div>
-                <div class="instagram-post"><img src="web/images/instagram/4.jpg"></div>
-            </div>
-        </div>
 
         <div class="container">
             <div class="row align-items-center">
@@ -109,17 +111,17 @@
 
 
     <!-- JS Plugins -->
-    <script src="web/plugins/jQuery/jquery.min.js"></script>
+    <script src="../../../web/plugins/jQuery/jquery.min.js"></script>
 
-    <script src="web/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../web/plugins/bootstrap/bootstrap.min.js"></script>
 
-    <script src="web/plugins/slick/slick.min.js"></script>
+    <script src="../../../web/plugins/slick/slick.min.js"></script>
 
-    <script src="web/plugins/instafeed/instafeed.min.js"></script>
+    <script src="../../../web/plugins/instafeed/instafeed.min.js"></script>
 
 
     <!-- Main Script -->
-    <script src="web/js/script.js"></script>
+    <script src="../../../web/js/script.js"></script>
 </body>
 
 </html>
