@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('blog_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('blog_id')->constrained('blog_posts')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('blog_posts')->onDelete('cascade');
             $table->text('body');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('commenter_name');
+            $table->string('commenter_email');
+            $table->string('commenter_website')->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('blog_comments')->onDelete('cascade'); // Self-referencing foreign key
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('approved'); // Assuming comments are auto-approved
             $table->timestamp('moderated_at')->nullable();
             $table->timestamps();
         });

@@ -25,7 +25,7 @@ class BlogPost extends Model
 
     public function comments()
     {
-        return $this->hasMany(BlogComment::class);
+        return $this->hasMany(BlogComment::class, 'post_id')->whereNull('parent_id')->with('replies'); // Only fetch top-level comments with their replies
     }
 
    public function calculateReadingTime()

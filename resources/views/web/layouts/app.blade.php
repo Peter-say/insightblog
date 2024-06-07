@@ -56,12 +56,51 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .avatar-img-fluid-container img{
+            height: 60px;
+            width: 60px;
+        }
+        .avatar-img-fluid{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
+
+<style>
+    #popup-message {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        z-index: 9999;
+    }
+
+    .popup-message.success {
+        background-color: green;
+        color: #ffffff
+    }
+
+    .popup-message.error {
+        background-color: red;
+    }
+
+    #cancel-popup {
+        font-size: 24px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+</style>
 </head>
 
 <body>
 
     @include('web.layouts.header')
+
+    @include('notifications.pop-up')
 
     @yield('contents')
 
@@ -109,7 +148,23 @@
         </div>
     </footer>
 
+    <script>
+        var popup = document.getElementById('popup-message');
 
+        if (popup) {
+            setTimeout(function() {
+                popup.style.display = 'none';
+            }, 8000);
+
+            // Hide the pop-up when clicking the close button
+            var closeButton = document.getElementById('cancel-popup');
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                });
+            }
+        }
+    </script>
     <!-- JS Plugins -->
     <script src="../../../web/plugins/jQuery/jquery.min.js"></script>
 

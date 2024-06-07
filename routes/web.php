@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\MetaDescription;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\CommentController;
 use App\Http\Controllers\Web\IndexController;
 use App\Http\Controllers\Web\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::prefix('post')->as('post.')->group(function() {
     Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');
     Route::get('/tags', [IndexController::class, 'tags'])->name('tags');
     Route::get('/author', [IndexController::class, 'author'])->name('author');
+    Route::post('/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 // Route::get('/dashboard', function () {
