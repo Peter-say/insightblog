@@ -66,7 +66,7 @@ class BlogPostFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'cover_image' => $savedImage,
-            'body' => $faker->paragraphs(mt_rand(3, 7), true),
+            'body' => $faker->paragraphs(mt_rand(7, 10), true),
             'published_at' => $faker->optional()->dateTime,
             'meta_title' => $faker->optional()->sentence,
             'meta_description' => $faker->optional()->sentence,
