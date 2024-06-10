@@ -3,7 +3,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-white">
         <a class="navbar-brand order-1" href="/">
-          <img class="img-fluid" width="100px" src="../../../web/images/logo.png"
+          <img class="img-fluid" width="100px" src="{{ asset('web/images/logo.png')}}"
             alt="Reader | Hugo Personal Blog Template">
         </a>
         <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">

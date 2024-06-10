@@ -23,16 +23,16 @@
     <meta name="theme-name" content="reader" />
 
     <!-- plugins -->
-    <link rel="stylesheet" href="../../../web/plugins/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../web/plugins/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="../../../web/plugins/slick/slick.css">
+    <link rel="stylesheet" href="{{ asset('web/plugins/bootstrap/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('web/plugins/themify-icons/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('web/plugins/slick/slick.css')}}">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="../../../web/css/style.css" media="screen">
+    <link rel="stylesheet" href="{{ asset('web/css/style.css')}}" media="screen">
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="web/images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="web/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('web/images/favicon.png')}}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('web/images/favicon.png')}}" type="image/x-icon">
 
     <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
     <meta property="og:description" content="This is meta description" />
@@ -123,7 +123,7 @@
                     </ul>
                 </div>
                 <div class="col-md-2 text-center mb-4">
-                    <a href="index.html"><img class="img-fluid" width="100px" src="images/logo.png"
+                    <a href="index.html"><img class="img-fluid" width="100px" src="{{ asset('images/logo.png')}}"
                             alt="Reader | Hugo Personal Blog Template"></a>
                 </div>
                 <div class="col-md-5 text-md-right text-center mb-4">
@@ -166,17 +166,17 @@
         }
     </script>
     <!-- JS Plugins -->
-    <script src="../../../web/plugins/jQuery/jquery.min.js"></script>
+    <script src="{{ asset('web/plugins/jQuery/jquery.min.js')}}"></script>
 
-    <script src="../../../web/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="{{ asset('web/plugins/bootstrap/bootstrap.min.js')}}"></script>
 
-    <script src="../../../web/plugins/slick/slick.min.js"></script>
+    <script src="{{ asset('web/plugins/slick/slick.min.js')}}"></script>
 
-    <script src="../../../web/plugins/instafeed/instafeed.min.js"></script>
+    <script src="{{ asset('web/plugins/instafeed/instafeed.min.js')}}"></script>
 
 
     <!-- Main Script -->
-    <script src="../../../web/js/script.js"></script>
+    <script src="{{ asset('web/js/script.js')}}"></script>
 </body>
 
 </html>
