@@ -167,8 +167,8 @@
                     @if ($popularPost)
                         <article class="card mb-4">
                             <div class="post-slider slider-sm">
-                                <img src="{{ asset('storage/blog/images/' . $popularPost->cover_image) }}" class="card-img-top card-img"
-                                    alt="post-thumb">
+                                <img src="{{ asset('storage/blog/images/' . $popularPost->cover_image) }}"
+                                    class="card-img-top card-img" alt="post-thumb">
                             </div>
                             <div class="card-body">
                                 <h3 class="h4 mb-3">
@@ -177,7 +177,8 @@
                                 </h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
-                                        <a href="{{ route('post.author', $popularPost->user->id) }}" class="card-meta-author">
+                                        <a href="{{ route('post.author', $popularPost->user->id) }}"
+                                            class="card-meta-author">
                                             @if (!empty($popularPost->user->avatar))
                                                 <img class="rounded-circle"
                                                     src="{{ asset('storage/user/images/' . $popularPost->user->avatar) }}"
@@ -214,7 +215,8 @@
                                     </li>
                                 </ul>
                                 <p>{{ Str::limit($popularPost->body, 150) }}</p>
-                                <a href="{{ route('post.details', $popularPost->slug) }}" class="btn btn-outline-primary">Read
+                                <a href="{{ route('post.details', $popularPost->slug) }}"
+                                    class="btn btn-outline-primary">Read
                                     More</a>
                             </div>
                         </article>
@@ -232,60 +234,60 @@
                     <h2 class="h5 section-title">Recent Post</h2>
 
                     @foreach ($blogs as $blog)
-                    <article class="card mb-4">
-                      <div class="post-slider">
-                        <img src="{{ asset('storage/blog/images/' . $blog->cover_image) }}" class="card-img-top card-img recent-blog-img"
-                        alt="{{$blog->cover_image}}">
-                      </div>
-                      <div class="card-body">
-                          <h3 class="mb-3"><a class="post-title" href="{{ route('post.details', $blog->slug) }}">{{$blog->title}}</a></h3>
-                          <ul class="card-meta list-inline">
-                            <li class="list-inline-item">
-                              <a href="{{ route('post.author', $blog->user->id) }}" class="card-meta-author">
-                                  @if (!empty($blog->user->avatar))
-                                      <img class="rounded-circle"
-                                          src="{{ asset('storage/user/images/' . $blog->user->avatar) }}"
-                                          alt="" />
-                                  @else
-                                      <img class="rounded-circle"
-                                          src="{{ asset('dashboard/assets/img/team/avatar.png') }}"
-                                          alt="" />
-                                  @endif
-                                  <span>{{ $blog->user->name }}</span>
-                              </a>
-                          </li>
-                              <li class="list-inline-item">
-                                <i class="ti-timer"></i>{{ $blog->calculateReadingTime() }} Min To Read
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="ti-calendar"></i>{{ $blog->created_at->format('d M, Y') }}
-                            </li>
-                              <li class="list-inline-item">
-                                  <ul class="card-meta-tag list-inline">
-                                    @if ($blog->meta_keywords)
-                                    @php
-                                        $metaKeywords = is_array($blog->meta_keywords)
-                                            ? $blog->meta_keywords
-                                            : explode(',', $blog->meta_keywords);
-                                    @endphp
-                                    @foreach ($metaKeywords as $tag)
-                                        <li class="list-inline-item"><a
-                                                href="#">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
-                                        </li>
-                                    @endforeach
-                                @endif
-                                  </ul>
-                              </li>
-                          </ul>
-                          <p>{{ Str::limit($blog->body, 150) }}</p>
+                        <article class="card mb-4">
+                            <div class="post-slider">
+                                <img src="{{ asset('storage/blog/images/' . $blog->cover_image) }}"
+                                    class="card-img-top card-img recent-blog-img" alt="{{ $blog->cover_image }}">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="mb-3"><a class="post-title"
+                                        href="{{ route('post.details', $blog->slug) }}">{{ $blog->title }}</a></h3>
+                                <ul class="card-meta list-inline">
+                                    <li class="list-inline-item">
+                                        <a href="{{ route('post.author', $blog->user->id) }}" class="card-meta-author">
+                                            @if (!empty($blog->user->avatar))
+                                                <img class="rounded-circle"
+                                                    src="{{ asset('storage/user/images/' . $blog->user->avatar) }}"
+                                                    alt="" />
+                                            @else
+                                                <img class="rounded-circle"
+                                                    src="{{ asset('dashboard/assets/img/team/avatar.png') }}"
+                                                    alt="" />
+                                            @endif
+                                            <span>{{ $blog->user->name }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="ti-timer"></i>{{ $blog->calculateReadingTime() }} Min To Read
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="ti-calendar"></i>{{ $blog->created_at->format('d M, Y') }}
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <ul class="card-meta-tag list-inline">
+                                            @if ($blog->meta_keywords)
+                                                @php
+                                                    $metaKeywords = is_array($blog->meta_keywords)
+                                                        ? $blog->meta_keywords
+                                                        : explode(',', $blog->meta_keywords);
+                                                @endphp
+                                                @foreach ($metaKeywords as $tag)
+                                                    <li class="list-inline-item"><a
+                                                            href="#">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
+                                                    </li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p>{{ Str::limit($blog->body, 150) }}</p>
                                 <a href="{{ route('post.details', $blog->slug) }}" class="btn btn-outline-primary">Read
                                     More</a>
-                      </div>
-                  </article>
-
+                            </div>
+                        </article>
                     @endforeach
-                  
-                 
+
+
 
                     <ul class="pagination justify-content-center">
                         <li class="page-item page-item active ">
@@ -396,40 +398,20 @@
                     <div class="widget widget-categories">
                         <h4 class="widget-title"><span>Categories</span></h4>
                         <ul class="list-unstyled widget-list">
-                            <li><a href="tags.html" class="d-flex">Creativity <small class="ml-auto">(4)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Demo <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Elements <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Food <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Microwave <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Natural <small class="ml-auto">(3)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Newyork city <small class="ml-auto">(1)</small></a>
-                            </li>
-                            <li><a href="tags.html" class="d-flex">Nice <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Tech <small class="ml-auto">(2)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Videography <small class="ml-auto">(1)</small></a>
-                            </li>
-                            <li><a href="tags.html" class="d-flex">Vlog <small class="ml-auto">(1)</small></a></li>
-                            <li><a href="tags.html" class="d-flex">Wondarland <small class="ml-auto">(1)</small></a></li>
+                            @foreach ($categories as $category)
+                                <li><a href="tags.html" class="d-flex">{{ $category->name }} <small
+                                            class="ml-auto">({{ $category->blogs->count() }})</small></a></li>
+                            @endforeach
+
                         </ul>
                     </div><!-- tags -->
                     <div class="widget">
                         <h4 class="widget-title"><span>Tags</span></h4>
                         <ul class="list-inline widget-list-inline widget-card">
-                            <li class="list-inline-item"><a href="tags.html">City</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Creative</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Demo</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Elements</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Fish</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Food</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Nice</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Season</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Taste</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Tasty</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Vlog</a></li>
-                            <li class="list-inline-item"><a href="tags.html">Wow</a></li>
+                            @foreach ($metaKeywords as $keyword)
+                                <li class="list-inline-item"><a
+                                        href="{{ route('post.details', $keyword) }}">{{ $keyword }}</a></li>
+                            @endforeach
                         </ul>
                     </div><!-- recent post -->
                     <div class="widget">

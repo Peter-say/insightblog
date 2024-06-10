@@ -1,6 +1,6 @@
 <div>
     <h3 class="mb-4">Leave a Comment</h3>
-    <form wire:submit.prevent="reply">
+    <form wire:submit.prevent="submit">
         <div class="row">
             <div class="form-group col-md-12">
                 <textarea class="form-control shadow-none @error('body') is-invalid @enderror" wire:model="body" rows="7" required></textarea>

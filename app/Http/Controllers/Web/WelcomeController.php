@@ -16,21 +16,39 @@ class WelcomeController extends Controller
 
         // Get the top 4 trending posts where view count is the highest
         $trendingPosts = BlogPost::with('category')
-            ->where('is_trending', true)
             ->orderBy('view_count', 'desc')
             ->take(4)
             ->get();
 
-        // Get the top 5 popular posts based on view count
+        // If no trending posts are found, get the top 4 posts with the highest view counts
+        if ($trendingPosts->isEmpty()) {
+            $trendingPosts = BlogPost::with('category')
+                ->take(4)
+                ->get();
+        }
+
+        // Get the most popular post based on view count
         $popularPost = BlogPost::with('category')
             ->where('status', 'active')
             ->orderBy('view_count', 'desc')
             ->first();
 
+        // If no active post is found, get the post with the highest view count
+        if (!$popularPost) {
+            $popularPost = BlogPost::with('category')
+                ->first();
+        }
+
         // Get the first featured post
         $featuredPost = BlogPost::with('category')
             ->where('is_featured', true)
             ->first();
+
+        // If no featured post is found, get the first post
+        if (!$featuredPost) {
+            $featuredPost = BlogPost::with('category')
+                ->first();
+        }
 
         // Collect all unique meta keywords from active blog posts
         $allMetaKeywords = BlogPost::where('status', 'active')->pluck('meta_keywords');

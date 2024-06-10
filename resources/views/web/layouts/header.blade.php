@@ -2,37 +2,15 @@
   <header class="navigation fixed-top">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-white">
-        <a class="navbar-brand order-1" href="index.html">
+        <a class="navbar-brand order-1" href="/">
           <img class="img-fluid" width="100px" src="../../../web/images/logo.png"
             alt="Reader | Hugo Personal Blog Template">
         </a>
         <div class="collapse navbar-collapse text-center order-lg-2 order-3" id="navigation">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                homepage <i class="ti-angle-down ml-1"></i>
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="index-full.html">Homepage Full Width</a>
-                
-                <a class="dropdown-item" href="index-full-left.html">Homepage Full With Left Sidebar</a>
-                
-                <a class="dropdown-item" href="index-full-right.html">Homepage Full With Right Sidebar</a>
-                
-                <a class="dropdown-item" href="index-list.html">Homepage List Style</a>
-                
-                <a class="dropdown-item" href="index-list-left.html">Homepage List With Left Sidebar</a>
-                
-                <a class="dropdown-item" href="index-list-right.html">Homepage List With Right Sidebar</a>
-                
-                <a class="dropdown-item" href="index-grid.html">Homepage Grid Style</a>
-                
-                <a class="dropdown-item" href="index-grid-left.html">Homepage Grid With Left Sidebar</a>
-                
-                <a class="dropdown-item" href="index-grid-right.html">Homepage Grid With Right Sidebar</a>
-                
-              </div>
+              <a class="nav-link" href="/">Homepage</a>
+              
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -41,18 +19,18 @@
               </a>
               <div class="dropdown-menu">
                 
-                <a class="dropdown-item" href="about-me.html">About Me</a>
+                <a class="dropdown-item" href="#">About Me</a>
                 
-                <a class="dropdown-item" href="about-us.html">About Us</a>
+                <a class="dropdown-item" href="#">About Us</a>
                 
               </div>
             </li>
   
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="#">Contact</a>
             </li>
   
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">Pages <i class="ti-angle-down ml-1"></i>
               </a>
@@ -81,12 +59,13 @@
                 <a class="dropdown-item" href="404.html">404 Page</a>
                 
               </div>
-            </li>
+            </li> --}}
   
             <li class="nav-item">
-              <a class="nav-link" href="shop.html">Shop</a>
+              <a class="nav-link" href="/">Blog</a>
             </li>
           </ul>
+          <a href="{{route('login')}}" class="btn btn-sm btn-primary">Login</a>
         </div>
   
         <div class="order-2 order-lg-3 d-flex align-items-center">

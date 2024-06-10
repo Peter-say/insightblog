@@ -86,6 +86,11 @@
                                         class="fab fa-trello"></span></span><span class="nav-link-text ps-1">Settings</span>
                             </div>
                         </a>
+                        <a class="nav-link" href="/" role="button">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">View Blog</span>
+                            </div>
+                        </a>
                     @endcan
                 </li>
 

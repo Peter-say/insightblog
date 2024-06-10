@@ -65,6 +65,11 @@ class BlogComment extends Component
         $this->showReplyForm = false;
     }
 
+    public function closePopup()
+    {
+        //
+    }
+
     public function render()
     {
         return view('livewire.blog-comment');
