@@ -164,6 +164,31 @@
                 });
             }
         }
+
+        window.addEventListener('load', function() {
+    $('#search-query').on('keyup', function() {
+        var query = $(this).val();
+        console.log('typing: ', query); // Debugging line
+
+        if (query.length > 2) {
+            $.ajax({
+                url: '{{ route('search') }}',
+                type: 'GET',
+                data: { search_terms: query },
+                success: function(data) {
+                    console.log(data); // Debugging line
+                    $('#search-results').html(data.html);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        } else {
+            $('#search-results').empty();
+        }
+    });
+});
+
     </script>
     <!-- JS Plugins -->
     <script src="{{ asset('web/plugins/jQuery/jquery.min.js')}}"></script>

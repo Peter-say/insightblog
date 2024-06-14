@@ -45,7 +45,7 @@
                                         @endphp
                                         @foreach ($metaKeywords as $tag)
                                             <li class="list-inline-item"><a
-                                                    href="#">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
+                                                    href="{{route('post.tags', $tag)}}">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
                                             </li>
                                         @endforeach
                                     @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -70,4 +71,26 @@ class WelcomeController extends Controller
 
         return view('web.welcome', compact('blogs', 'trendingPosts', 'popularPost', 'featuredPost', 'metaKeywords', 'categories'));
     }
+
+   public function search(Request $request)
+   {
+    $searchTerm = $request->get('search_terms');
+
+    // Search blog posts
+    $blogs = BlogPost::with('category')
+        ->where('title', 'LIKE', "%{$searchTerm}%")
+        ->orWhereHas('category', function($query) use ($searchTerm) {
+            $query->where('name', 'LIKE', "%{$searchTerm}%");
+        })
+        ->get();
+
+    // Search users
+    $users = User::where('name', 'LIKE', "%{$searchTerm}%")
+        ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+        ->get();
+
+        return response()->json([
+            'html' => view('web.search-results', compact('blogs', 'users'))->render(),
+        ]);
+   }
 }

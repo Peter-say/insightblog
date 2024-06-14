@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\User;
 use App\Policies\BlogCommentPolicy;
@@ -11,6 +12,7 @@ use App\Policies\UserPolicy;
 use Egulias\EmailValidator\Parser\Comment;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -51,5 +53,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage-settings', function (User $user) {
             return $user->isAdmin() || $user->isModerator() || $user->isAuthor();
         });
+
+
+        // Fetch categories from the database
+        $categories = BlogCategory::all();
+        // Share $categories with all views
+        View::share('categories', $categories);
     }
 }

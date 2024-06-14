@@ -17,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [WelcomeController::class, 'welcome']);
+Route::get('search', [WelcomeController::class, 'search'])->name('search');
 Route::prefix('post')->as('post.')->group(function() {
     Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');
-    Route::get('/tags', [IndexController::class, 'tags'])->name('tags');
+    Route::get('/tag/{tag}', [IndexController::class, 'blogByTags'])->name('tags');
     Route::get('/author', [IndexController::class, 'author'])->name('author');
     Route::post('/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
