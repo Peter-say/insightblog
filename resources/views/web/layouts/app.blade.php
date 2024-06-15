@@ -23,16 +23,16 @@
     <meta name="theme-name" content="reader" />
 
     <!-- plugins -->
-    <link rel="stylesheet" href="{{ asset('web/plugins/bootstrap/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('web/plugins/themify-icons/themify-icons.css')}}">
-    <link rel="stylesheet" href="{{ asset('web/plugins/slick/slick.css')}}">
+    <link rel="stylesheet" href="{{ asset('web/plugins/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/plugins/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('web/plugins/slick/slick.css') }}">
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('web/css/style.css')}}" media="screen">
+    <link rel="stylesheet" href="{{ asset('web/css/style.css') }}" media="screen">
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="{{ asset('web/images/favicon.png')}}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('web/images/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('web/images/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('web/images/favicon.png') }}" type="image/x-icon">
 
     <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
     <meta property="og:description" content="This is meta description" />
@@ -57,52 +57,56 @@
             object-fit: cover;
         }
 
-        .avatar-img-fluid-container img{
+        .avatar-img-fluid-container img {
             height: 60px;
             width: 60px;
         }
-        .avatar-img-fluid{
+
+        .avatar-img-fluid {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
     </style>
 
-<style>
-    #popup-message {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        text-align: center;
-        z-index: 9999;
-    }
+    <style>
+        #popup-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            z-index: 9999;
+        }
 
-    .popup-message.success {
-        background-color: green;
-        color: #ffffff
-    }
+        .popup-message.success {
+            background-color: green;
+            color: #ffffff
+        }
 
-    .popup-message.error {
-        background-color: red;
-    }
+        .popup-message.error {
+            background-color: red;
+        }
 
-    #cancel-popup {
-        font-size: 24px;
-        color: #ffffff;
-        cursor: pointer;
-    }
-</style>
+        #cancel-popup {
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-
+   
     @include('web.layouts.header')
 
     @include('notifications.pop-up')
-
+    
+   
+    <div id="search-results">
     @yield('contents')
+   
 
     <footer class="footer">
         <svg class="footer-border" height="214" viewBox="0 0 2204 214" fill="none"
@@ -123,7 +127,7 @@
                     </ul>
                 </div>
                 <div class="col-md-2 text-center mb-4">
-                    <a href="index.html"><img class="img-fluid" width="100px" src="{{ asset('images/logo.png')}}"
+                    <a href="index.html"><img class="img-fluid" width="100px" src="{{ asset('images/logo.png') }}"
                             alt="Reader | Hugo Personal Blog Template"></a>
                 </div>
                 <div class="col-md-5 text-md-right text-center mb-4">
@@ -166,42 +170,38 @@
         }
 
         window.addEventListener('load', function() {
-    $('#search-query').on('keyup', function() {
-        var query = $(this).val();
-        console.log('typing: ', query); // Debugging line
-
-        if (query.length > 2) {
-            $.ajax({
-                url: '{{ route('search') }}',
-                type: 'GET',
-                data: { search_terms: query },
-                success: function(data) {
-                    console.log(data); // Debugging line
-                    $('#search-results').html(data.html);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
+            document.getElementById('search-query').addEventListener('keyup', function() {
+                var query = this.value;
+                if (query.length > 2) {
+                    $.ajax({
+                        url: '{{ route('search') }}',
+                        type: 'GET',
+                        data: { search_terms: query },
+                        success: function(data) {
+                            $('#search-results').html(data.html);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    $('#search-results').empty();
                 }
             });
-        } else {
-            $('#search-results').empty();
-        }
-    });
-});
-
+        });
     </script>
     <!-- JS Plugins -->
-    <script src="{{ asset('web/plugins/jQuery/jquery.min.js')}}"></script>
+    <script src="{{ asset('web/plugins/jQuery/jquery.min.js') }}"></script>
 
-    <script src="{{ asset('web/plugins/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('web/plugins/bootstrap/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('web/plugins/slick/slick.min.js')}}"></script>
+    <script src="{{ asset('web/plugins/slick/slick.min.js') }}"></script>
 
-    <script src="{{ asset('web/plugins/instafeed/instafeed.min.js')}}"></script>
+    <script src="{{ asset('web/plugins/instafeed/instafeed.min.js') }}"></script>
 
 
     <!-- Main Script -->
-    <script src="{{ asset('web/js/script.js')}}"></script>
+    <script src="{{ asset('web/js/script.js') }}"></script>
 </body>
 
 </html>

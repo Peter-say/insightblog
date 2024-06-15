@@ -74,6 +74,7 @@ class WelcomeController extends Controller
 
    public function search(Request $request)
    {
+
     $searchTerm = $request->get('search_terms');
 
     // Search blog posts
@@ -92,5 +93,7 @@ class WelcomeController extends Controller
         return response()->json([
             'html' => view('web.search-results', compact('blogs', 'users'))->render(),
         ]);
+
+       
    }
 }
