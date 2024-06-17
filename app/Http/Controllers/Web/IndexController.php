@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Helpers\PageMetaData;
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
@@ -10,9 +11,10 @@ class IndexController extends Controller
 {
     public function details($slug)
     {
+       
         // Fetch the current blog post
         $blog = BlogPost::with('category')->where('slug', $slug)->firstOrFail();
-
+        $metaData = PageMetaData::getPostMetaData($blog);
         // Increment the view count
         $blog->increment('view_count');
 
@@ -22,7 +24,7 @@ class IndexController extends Controller
             ->take(6)
             ->get();
 
-        return view('web.details', compact('blog', 'relatedPosts'));
+        return view('web.details', compact('blog', 'relatedPosts', 'metaData'));
     }
 
 

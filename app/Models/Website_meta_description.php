@@ -10,8 +10,8 @@ class Website_meta_description extends Model
     use HasFactory;
     protected $fillable = ['description'];
 
-    public function Description()
-    {
-        return $this->description;
-    }
+    // public function description()
+    // {
+    //     return $this->description;
+    // }
 }

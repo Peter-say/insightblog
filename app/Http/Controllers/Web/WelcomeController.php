@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Helpers\PageMetaData;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
@@ -12,7 +13,8 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        // Get all active blog posts with their category, ordered by creation date
+        $metaData = PageMetaData::welcome();
+        // Get all active blog posts with their cametaDatategory, ordered by creation date
         $blogs = BlogPost::with('category')->where('status', 'active')->orderBy('created_at', 'desc')->paginate(5);
 
         // Get the top 4 trending posts where view count is the highest
@@ -69,7 +71,7 @@ class WelcomeController extends Controller
             return $category->blogs->count() > 0;
         });
 
-        return view('web.welcome', compact('blogs', 'trendingPosts', 'popularPost', 'featuredPost', 'metaKeywords', 'categories'));
+        return view('web.welcome', compact('blogs', 'trendingPosts', 'metaData', 'popularPost', 'featuredPost', 'metaKeywords', 'categories'));
     }
 
     public function searchPage()

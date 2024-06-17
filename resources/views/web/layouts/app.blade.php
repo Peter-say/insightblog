@@ -11,13 +11,31 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Reader | Hugo Personal Blog Template</title>
+    {{-- <title>Reader | Hugo Personal Blog Template</title>
 
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="This is meta description">
     <meta name="author" content="Themefisher">
     <meta name="generator" content="Hugo 0.74.3" />
+    <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
+    <meta property="og:description" content="This is meta description" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:updated_time" content="2020-03-15T15:40:24+06:00" /> --}}
+
+    <title>{{ $metaData->title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{{ $metaData->description }}">
+    <meta name="keywords" content="{{ $metaData->keywords }}">
+    <meta property="og:title" content="{{ $metaData->title }}">
+    <meta property="og:description" content="{{ $metaData->description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $metaData->og_url }}">
+    <meta property="og:image" content="{{ $metaData->og_image }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
 
     <!-- theme meta -->
     <meta name="theme-name" content="reader" />
@@ -34,12 +52,7 @@
     <link rel="shortcut icon" href="{{ asset('web/images/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('web/images/favicon.png') }}" type="image/x-icon">
 
-    <meta property="og:title" content="Reader | Hugo Personal Blog Template" />
-    <meta property="og:description" content="This is meta description" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="" />
-    <meta property="og:updated_time" content="2020-03-15T15:40:24+06:00" />
-
+   
     <style>
         .recent-blog-img {
             height: 400px;
