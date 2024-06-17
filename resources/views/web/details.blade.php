@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@include('web.layouts.meta-data');
 <style>
     .commenter-image {
         width: 100px;

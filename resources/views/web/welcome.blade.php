@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-
+@include('web.layouts.meta-data');
 @section('contents')
 
 
