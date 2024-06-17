@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-@include('web.layouts.meta-data');
+@include('web.layouts.meta-data', ['metaData' => $metaData]);
 <style>
     .commenter-image {
         width: 100px;
@@ -62,7 +62,19 @@
                         </ul>
                         <div class="content">{!! html_entity_decode($blog->body) !!}</div>
 
+                 <!-- Social Media Share Buttons -->
+                 <div class="share-buttons mt-4">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url()) }}" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-facebook-f"></i> Share on Facebook
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(Request::url()) }}&text={{ $metaData->title }}" target="_blank" class="btn btn-info">
+                        <i class="fab fa-twitter"></i> Share on Twitter
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(Request::url()) }}&title={{ $metaData->title }}&summary={{ $metaData->description }}" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+                    </a>
                 </div>
+            </div>
                 </article>
 
 
@@ -100,22 +112,22 @@
 
                                             <div class="form-group col-md-4">
                                                 <input class="form-control shadow-none" type="text" name="commenter_name"
-                                                       placeholder="Name"
-                                                       value="{{ Auth::check() ? Auth::user()->name : (Session::get('commenter_name') ?: Cookie::get('commenter_name') ?: old('commenter_name')) }}"
-                                                       {{ Auth::check() || Session::has('commenter_name') || Cookie::has('commenter_name') ? 'readonly' : 'required' }}>
+                                                    placeholder="Name"
+                                                    value="{{ Auth::check() ? Auth::user()->name : (Session::get('commenter_name') ?: Cookie::get('commenter_name') ?: old('commenter_name')) }}"
+                                                    {{ Auth::check() || Session::has('commenter_name') || Cookie::has('commenter_name') ? 'readonly' : 'required' }}>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <input class="form-control shadow-none" type="email" name="commenter_email"
-                                                       placeholder="Email"
-                                                       value="{{ Auth::check() ? Auth::user()->email : (Session::get('commenter_email') ?: Cookie::get('commenter_email') ?: old('commenter_email')) }}"
-                                                       {{ Auth::check() || Session::has('commenter_email') || Cookie::has('commenter_email') ? 'readonly' : 'required' }}>
+                                                <input class="form-control shadow-none" type="email"
+                                                    name="commenter_email" placeholder="Email"
+                                                    value="{{ Auth::check() ? Auth::user()->email : (Session::get('commenter_email') ?: Cookie::get('commenter_email') ?: old('commenter_email')) }}"
+                                                    {{ Auth::check() || Session::has('commenter_email') || Cookie::has('commenter_email') ? 'readonly' : 'required' }}>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <input class="form-control shadow-none" type="url" name="commenter_website"
-                                                       placeholder="Website"
-                                                       value="{{ Auth::check() ? Auth::user()->website : (Session::get('commenter_website') ?: Cookie::get('commenter_website') ?: old('commenter_website')) }}">
+                                                <input class="form-control shadow-none" type="url"
+                                                    name="commenter_website" placeholder="Website"
+                                                    value="{{ Auth::check() ? Auth::user()->website : (Session::get('commenter_website') ?: Cookie::get('commenter_website') ?: old('commenter_website')) }}">
                                             </div>
-                                            
+
 
 
                                         </div>
@@ -167,22 +179,22 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <input class="form-control shadow-none" type="text" name="commenter_name"
-                                           placeholder="Name"
-                                           value="{{ Auth::check() ? Auth::user()->name : (Session::get('commenter_name') ?: Cookie::get('commenter_name') ?: old('commenter_name')) }}"
-                                           {{ Auth::check() || Session::has('commenter_name') || Cookie::has('commenter_name') ? 'readonly' : 'required' }}>
+                                        placeholder="Name"
+                                        value="{{ Auth::check() ? Auth::user()->name : (Session::get('commenter_name') ?: Cookie::get('commenter_name') ?: old('commenter_name')) }}"
+                                        {{ Auth::check() || Session::has('commenter_name') || Cookie::has('commenter_name') ? 'readonly' : 'required' }}>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <input class="form-control shadow-none" type="email" name="commenter_email"
-                                           placeholder="Email"
-                                           value="{{ Auth::check() ? Auth::user()->email : (Session::get('commenter_email') ?: Cookie::get('commenter_email') ?: old('commenter_email')) }}"
-                                           {{ Auth::check() || Session::has('commenter_email') || Cookie::has('commenter_email') ? 'readonly' : 'required' }}>
+                                        placeholder="Email"
+                                        value="{{ Auth::check() ? Auth::user()->email : (Session::get('commenter_email') ?: Cookie::get('commenter_email') ?: old('commenter_email')) }}"
+                                        {{ Auth::check() || Session::has('commenter_email') || Cookie::has('commenter_email') ? 'readonly' : 'required' }}>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <input class="form-control shadow-none" type="url" name="commenter_website"
-                                           placeholder="Website"
-                                           value="{{ Auth::check() ? Auth::user()->website : (Session::get('commenter_website') ?: Cookie::get('commenter_website') ?: old('commenter_website')) }}">
+                                        placeholder="Website"
+                                        value="{{ Auth::check() ? Auth::user()->website : (Session::get('commenter_website') ?: Cookie::get('commenter_website') ?: old('commenter_website')) }}">
                                 </div>
-                                
+
 
                             </div>
                             <button class="btn btn-primary" type="submit">Comment Now</button>
