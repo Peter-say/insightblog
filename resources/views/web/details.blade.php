@@ -6,6 +6,9 @@
         height: 100px;
     }
 </style>
+
+
+
 @section('contents')
 
     <div class="py-4"></div>

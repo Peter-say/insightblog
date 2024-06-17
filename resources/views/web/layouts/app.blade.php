@@ -104,7 +104,7 @@
     @include('notifications.pop-up')
     
    
-    <div id="search-results">
+   
     @yield('contents')
    
 
@@ -127,7 +127,7 @@
                     </ul>
                 </div>
                 <div class="col-md-2 text-center mb-4">
-                    <a href="index.html"><img class="img-fluid" width="100px" src="{{ asset('images/logo.png') }}"
+                    <a href="index.html"><img class="img-fluid" width="100px" src="{{ asset('web/images/logo.png') }}"
                             alt="Reader | Hugo Personal Blog Template"></a>
                 </div>
                 <div class="col-md-5 text-md-right text-center mb-4">
@@ -171,19 +171,24 @@
 
         window.addEventListener('load', function() {
             document.getElementById('search-query').addEventListener('keyup', function() {
+                var currentSearchResultsHtml = $('#search-results').html(); // Save current search results
                 var query = this.value;
-                if (query.length > 2) {
-                    $.ajax({
-                        url: '{{ route('search') }}',
-                        type: 'GET',
-                        data: { search_terms: query },
-                        success: function(data) {
-                            $('#search-results').html(data.html);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
+                if (query.length > 0) { // Check if query is not empty
+                    if (query.length > 2) {
+                        $.ajax({
+                            url: '{{ route('search') }}',
+                            type: 'GET',
+                            data: { search_terms: query },
+                            success: function(data) {
+                                $('#search-results').html(data.html);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    } else {
+                        $('#search-results').empty();
+                    }
                 } else {
                     $('#search-results').empty();
                 }

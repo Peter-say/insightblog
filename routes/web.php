@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [WelcomeController::class, 'welcome']);
+Route::get('search-page', [WelcomeController::class, 'searchPage'])->name('search-page');
 Route::get('search', [WelcomeController::class, 'search'])->name('search');
 Route::prefix('post')->as('post.')->group(function() {
     Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');

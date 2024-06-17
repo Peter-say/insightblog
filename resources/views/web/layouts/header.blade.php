@@ -80,7 +80,7 @@
 
                   <!-- search -->
                   <form class="search-bar">
-                      <input id="search-query" name="search_terms" type="search" placeholder="Type &amp; Hit Enter...">
+                     <a href="{{route('search-page')}}"> <input  type="search" placeholder="Type &amp; Hit Enter..."></a>
                   </form>
 
                   <button class="navbar-toggler border-0 order-1" type="button" data-toggle="collapse"

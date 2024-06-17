@@ -1,6 +1,5 @@
 
     <div class="py-3"></div>
-   
     <section class="section" id="search-results">
         <div class="container">
             <div class="row justify-content-center">
@@ -86,7 +85,18 @@
                     @endif
 
                     @if ($blogs->isEmpty() && $users->isEmpty())
-                        <p>No results found for "{{ request('search_terms') }}".</p>
+                        {{-- <p>No results found for "{{ request('search_terms') }}".</p> --}}
+                        <section class="section">
+                            <div class="container">
+                              <div class="row justify-content-center">
+                                
+                                <div class="col-lg-10 text-center">
+                                  <img class="mb-5" src="{{asset('web/images/no-search-found.svg')}}" alt="">
+                                  <h3>No Search Found</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
                     @endif
                 </div>
             </div>

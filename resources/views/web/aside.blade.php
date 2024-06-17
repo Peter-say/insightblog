@@ -3,9 +3,9 @@
     <div class="widget">
         <h4 class="widget-title"><span>Search</span></h4>
         <form action="#!" class="widget-search">
-            <input class="mb-3" id="search-query" name="search_terms" type="search"
+            <a href="{{route('search-page')}}"><input class="mb-3" id="search-query" name="search_terms" type="search"
                 placeholder="Type &amp; Hit Enter...">
-            <i class="ti-search"></i>
+            <i class="ti-search"></i></a>
             <button type="submit" class="btn btn-primary btn-block">Search</button>
         </form>
     </div>
@@ -107,7 +107,7 @@
         <ul class="list-inline widget-list-inline widget-card">
             @foreach ($metaKeywords as $keyword)
                 <li class="list-inline-item"><a
-                        href="{{ route('post.details', $keyword) }}">{{ $keyword }}</a></li>
+                        href="{{ route('post.tags', $keyword) }}">{{ $keyword }}</a></li>
             @endforeach
         </ul>
     </div><!-- recent post -->

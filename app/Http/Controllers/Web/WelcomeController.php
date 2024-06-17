@@ -72,6 +72,11 @@ class WelcomeController extends Controller
         return view('web.welcome', compact('blogs', 'trendingPosts', 'popularPost', 'featuredPost', 'metaKeywords', 'categories'));
     }
 
+    public function searchPage()
+    {
+        return view('web.layouts.search-page');
+    }
+
    public function search(Request $request)
    {
 
