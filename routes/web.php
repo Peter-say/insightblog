@@ -43,12 +43,12 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
 
     // meta description
   Route::get('/website-meta-description/create', [WebsiteDescription::class, 'create'])->name('website-meta-description.create');
-  Route::post('/', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');
+  Route::post('/website-meta-description', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');
   Route::get('website-meta-description/{id}', [WebsiteDescription::class, 'edit'])->name('website-meta-description.edit');
   Route::put('website-meta-description/{id}', [WebsiteDescription::class, 'update'])->name('website-meta-description.update');
   Route::delete('website-meta-description/{id}', [WebsiteDescription::class, 'destroy'])->name('website-meta-description.destroy');
 
-  Route::get('/', [WebsiteDescription::class, 'createMetaTitle'])->name('website-title.create');
+  Route::get('/website-title/create', [WebsiteDescription::class, 'createMetaTitle'])->name('website-title.create');
   Route::post('website-title/store', [WebsiteDescription::class, 'storeMetaTitle'])->name('website-title.store');
   Route::get('website-title/{id}/edit', [WebsiteDescription::class, 'EditMetaTitle'])->name('website-title.edit');
   Route::put('website-title/{id}/update', [WebsiteDescription::class, 'updateMetaTitle'])->name('website-title.update');

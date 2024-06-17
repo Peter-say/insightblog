@@ -2,7 +2,7 @@
 
 @section('contents')
     <div class="container-fluid mb-5">
-        @include('notifications.flash_messages')
+        @include('notifications.pop-up')
         <h4 class="fw-bold py-3 mb-1">Meta Title</h4><span><i>Write Your Website Title</i></span>
 
         <form action="{{route('dashboard.website-title.store')}}" method="post">

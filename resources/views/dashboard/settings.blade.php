@@ -34,9 +34,7 @@
                             @endif
                         @else
                             <div class="d-flex justify-content-between col-lg-8 col-xl-8 col-md-12 col-sm-12">
-                                <span>
-                                    <h2>{{ $website_title->meta_title ?? config('app.name') }}</h2>
-                                </span>
+                                <h2>{{ $website_title->meta_title ?? config('app.name') }}</h2>
                                 @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Moderator')
                                     <span><a href="{{ route('dashboard.website-title.edit', $website_title->id) }}"
                                             class="btn btn-primary ">Edit</a></span>
