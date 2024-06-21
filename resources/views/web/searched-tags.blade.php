@@ -1,6 +1,5 @@
 @extends('web.layouts.app')
 
-
 @section('contents')
     <section class="section">
         <div class="py-4"></div>
@@ -15,8 +14,10 @@
                                     class="card-img-top card-img recent-blog-img" alt="{{ $blog->cover_image }}">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title"
-                                        href="{{ route('post.details', $blog->slug) }}">{{ $blog->title }}</a></h3>
+                                <h3 class="mb-3">
+                                    <a class="post-title"
+                                        href="{{ route('post.details', $blog->slug) }}">{{ $blog->title }}</a>
+                                </h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="{{ route('post.author', $blog->user->id) }}" class="card-meta-author">
@@ -47,8 +48,8 @@
                                                         : explode(',', $blog->meta_keywords);
                                                 @endphp
                                                 @foreach ($metaKeywords as $tag)
-                                                    <li class="list-inline-item"><a
-                                                            href="#">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
+                                                    <li class="list-inline-item">
+                                                        <a href="#">{{ is_array($tag) ? $tag['name'] : $tag }}</a>
                                                     </li>
                                                 @endforeach
                                             @endif
@@ -62,13 +63,10 @@
                         </article>
                     @endforeach
                     <div class="d-flex justify-content-center">
-                        <h4>That's All </h4>
+                        <h4>That's All</h4>
                     </div>
                 </div>
-
                 @include('web.aside', ['categories' => $categories])
-
             </div>
-        </div>
     </section>
 @endsection

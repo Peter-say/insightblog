@@ -1,21 +1,20 @@
 @extends('web.layouts.app')
 
 @section('contents')
-<div class="py-4"></div>
-<section class="section">
+    <div class="py-4"></div>
     <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-8 col-sm-12">
+        <div class="row justify-content-center mt-5 mb-5">
+            <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header text-center">
                         <h4 class="card-title">Search</h4>
                     </div>
                     <div class="card-body">
                         <form action="#!" class="widget-search">
-                            <div class="form-group">
+                            <div class="form-group position-relative">
                                 <input class="form-control mb-3" id="search-query" name="search_terms" type="search"
                                     placeholder="Type & Hit Enter...">
-                                <i class="ti-search"></i>
+                                <i class="ti-search position-absolute" style="top: 10px; right: 10px;"></i>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Search</button>
                         </form>
@@ -25,10 +24,9 @@
         </div>
 
         <div class="row justify-content-center mt-3">
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div id="search-results"></div>
             </div>
         </div>
     </div>
-</section>
 @endsection

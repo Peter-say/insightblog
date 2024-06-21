@@ -11,7 +11,7 @@
     </div>
 
     <!-- about me -->
-    <div class="widget widget-about">
+    {{-- <div class="widget widget-about">
         <h4 class="widget-title">Hi, I am Alex!</h4>
         <img class="img-fluid" src="{{asset('web/images/author.jpg')}}" alt="Themefisher">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel in in donec iaculis tempus odio nunc
@@ -30,7 +30,7 @@
 
         </ul>
         <a href="about-me.html" class="btn btn-primary mb-2">About me</a>
-    </div>
+    </div> --}}
 
     <!-- Promotion -->
     <div class="promotion">
@@ -111,7 +111,7 @@
             @endforeach
         </ul>
     </div><!-- recent post -->
-    <div class="widget">
+    {{-- <div class="widget">
         <h4 class="widget-title">Recent Post</h4>
 
         <!-- post-item -->
@@ -159,7 +159,7 @@
                 </div>
             </div>
         </article>
-    </div>
+    </div> --}}
 
     <!-- Social -->
     <div class="widget">
