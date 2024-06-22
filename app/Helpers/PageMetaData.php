@@ -51,8 +51,8 @@ class PageMetaData
             $post->title,
             $post->meta_description ?? Str::limit($post->body, 150),
             route('post.details', $post->slug),
-            asset('storage/blog/cover_images/' . $post->cover_image) ?? asset('web/images/default-image.png'),
-
+           $post_image = asset('storage/blog/images/' . $post->cover_image) ?? asset('web/images/default-image.png'),
+        //    dd($post_image),
         );
     }
 }
