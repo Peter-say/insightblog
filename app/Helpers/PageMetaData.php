@@ -10,12 +10,12 @@ use Illuminate\Support\Str;
 
 class PageMetaData
 {
-    const DEFAULT_SUFFIX = "- Insightblog";
-    const DEFAULT_KEYWORDS = "Read, Research, Learn stuffs, Explore Services.";
+    const DEFAULT_SUFFIX = "Insightblog";
+    const DEFAULT_KEYWORDS = "- Read, Research, Learn stuffs, Explore Services.";
 
-    public static function getTitle(string $name)
+    public static function getTitle()
     {
-        return $name . " " . self::DEFAULT_SUFFIX;
+        return self::DEFAULT_SUFFIX;
     }
 
     public static function getDefaultKeywords()
@@ -29,7 +29,7 @@ class PageMetaData
         $customMetaData = new Website_meta_description();
         $metaTitle = (new WebsiteMetaTitle())->appName();
         return $meta
-            ->setAttribute("title", $metaTitle ?? $title)
+            ->setAttribute("title", $title)
             ->setAttribute("description", $customMetaData->description ?? $description)
             ->setAttribute("keywords", self::getDefaultKeywords())
             ->setAttribute("og_url", $ogUrl)
@@ -39,7 +39,7 @@ class PageMetaData
     public static function welcome()
     {
         return self::createMetaData(
-            'Welcome to SwiftlySend',
+            'Welcome to Insightblog' . " - " . self::getDefaultKeywords(),
             'Discover SwiftlySend - Your Premier Destination for Cutting-Edge Information and Tech Solutions. Explore Our Website Today!',
             'https://blog.swiftlysend.online/'
         );

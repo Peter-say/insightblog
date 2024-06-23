@@ -11,10 +11,10 @@
                     </div>
                     <div class="card-body">
                         <form action="#!" class="widget-search">
-                            <div class="form-group position-relative">
+                            <div class="form-group">
                                 <input class="form-control mb-3" id="search-query" name="search_terms" type="search"
                                     placeholder="Type & Hit Enter...">
-                                <i class="ti-search position-absolute" style="top: 10px; right: 10px;"></i>
+                                <i class="ti-search" ></i>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Search</button>
                         </form>
@@ -23,10 +23,7 @@
             </div>
         </div>
 
-        <div class="row justify-content-center mt-3">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div id="search-results"></div>
-            </div>
-        </div>
+       <div id="search-results"></div>
+        
     </div>
 @endsection

@@ -19,10 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'welcome']);
 Route::get('search-page', [WelcomeController::class, 'searchPage'])->name('search-page');
 Route::get('search', [WelcomeController::class, 'search'])->name('search');
+Route::get('/category/{name}', [IndexController::class, 'blogByCategory'])->name('category');
 Route::prefix('post')->as('post.')->group(function() {
     Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');
     Route::get('/tag/{tag}', [IndexController::class, 'blogByTags'])->name('tags');
     Route::get('/author', [IndexController::class, 'author'])->name('author');
+   
     Route::post('/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 

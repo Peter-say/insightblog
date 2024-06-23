@@ -63,27 +63,31 @@
                         <div class="content">{!! html_entity_decode($blog->body) !!}</div>
 
                         <!-- Social Media Share Buttons -->
-                        <h4>Share To...</h4>
-                        <div class="share-buttons mt-4 d-flex justify-content-space-between">
-                          
+
+                        <div class=" row share-buttons mt-4 d-flex flex-wrap justify-content-between">
+                            <div class="col-12">
+                                <h4>Share To...</h4>
+                            </div>
+                            <div class="col-lg-4 col-xl-4 col-sm-6 mb-2">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url()) }}"
-                                    target="_blank" class="btn btn-primary">
-                                    <i class="fab fa-facebook-f"></i>Facebook
+                                    target="_blank" class="btn btn-primary w-100">
+                                    <i class="fab fa-facebook-f"></i> Facebook
                                 </a>
-
-
+                            </div>
+                            <div class="col-lg-4 col-xl-4 col-sm-6 mb-2">
                                 <a href="https://twitter.com/intent/tweet?url={{ urlencode(Request::url()) }}&text={{ $metaData->title }}"
-                                    target="_blank" class="btn btn-info">
-                                    <i class="fab fa-twitter"></i>Twitter
+                                    target="_blank" class="btn btn-info w-100">
+                                    <i class="fab fa-twitter"></i> Twitter
                                 </a>
-
-
+                            </div>
+                            <div class="col-lg-4 col-xl-4 col-sm-6 mb-2">
                                 <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(Request::url()) }}&title={{ $metaData->title }}&summary={{ $metaData->description }}"
-                                    target="_blank" class="btn btn-primary">
-                                    <i class="fab fa-linkedin-in"></i>LinkedIn
+                                    target="_blank" class="btn btn-primary w-100">
+                                    <i class="fab fa-linkedin-in"></i> LinkedIn
                                 </a>
-
+                            </div>
                         </div>
+
 
                     </article>
                 </div>

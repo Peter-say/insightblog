@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Helpers\PageMetaData;
 use App\Http\Controllers\Controller;
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,12 @@ class IndexController extends Controller
             ->get();
 
         return view('web.searched-tags', compact('blogs', 'tag'));
+    }
+
+    public function blogByCategory($name)
+    {
+        $category = BlogCategory::where('name', $name)->first();
+        return view('web.category-blogs', compact('category'));
     }
 
     public function author()

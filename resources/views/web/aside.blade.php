@@ -39,12 +39,12 @@
             <h5 class="text-white mb-3">Create Stunning Website!!</h5>
             <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur sociis. Etiam nunc amet id
                 dignissim. Feugiat id tempor vel sit ornare turpis posuere.</p>
-            <a href="https://themefisher.com/" class="btn btn-primary">Get Started</a>
+            <a href="#" class="btn btn-primary">Get Started</a>
         </div>
     </div>
 
     <!-- authors -->
-    <div class="widget widget-author">
+    {{-- <div class="widget widget-author">
         <h4 class="widget-title">Authors</h4>
         <div class="media align-items-center">
             <div class="mr-3">
@@ -73,7 +73,7 @@
                 <span>Author &amp; developer of Bexer, Biztrox theme</span>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Search -->
 
     <div class="widget">
@@ -96,7 +96,7 @@
         <h4 class="widget-title"><span>Categories</span></h4>
         <ul class="list-unstyled widget-list">
             @foreach ($categories as $category)
-                <li><a href="tags.html" class="d-flex">{{ $category->name }} <small
+                <li><a href="{{route('category', $category->name)}}" class="d-flex">{{ $category->name }} <small
                             class="ml-auto">({{ $category->blogs->count() }})</small></a></li>
             @endforeach
 
