@@ -214,7 +214,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <p>{{ Str::limit($popularPost->body, 150) }}</p>
+                                <p>{!! html_entity_decode( Str::limit($popularPost->body, 150)) !!}</p>
                                 <a href="{{ route('post.details', $popularPost->slug) }}"
                                     class="btn btn-outline-primary">Read
                                     More</a>

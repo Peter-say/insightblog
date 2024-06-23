@@ -5,7 +5,21 @@
         width: 100px;
         height: 100px;
     }
+
+    .highlighted-column {
+        background-color:rgba(240, 235, 235, 0.959);
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .fixed-column {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
 </style>
+
 
 
 
@@ -100,7 +114,7 @@
                     <h3 class="mb-4">Comments</h3>
 
                     @foreach ($blog->comments as $comment)
-                        <div class="media d-block d-sm-flex mb-4 pb-4" id="comment-{{ $comment->id }}">
+                        <div class="media d-block d-sm-flex mb-4 pb-4 comment-{{ $comment->id }}" id="comment-{{ $comment->id }}">
                             <a class="d-inline-block mr-2 mb-3 mb-md-0" href="#">
                                 @if ($comment->user && !empty($comment->user->avatar))
                                     <img src="{{ asset('storage/user/avatars/' . $comment->user->avatar) }}"
@@ -154,7 +168,7 @@
 
                                 <!-- Replies -->
                                 @foreach ($comment->replies as $reply)
-                                    <div class="media d-block d-sm-flex mt-4">
+                                    <div class="media d-block d-sm-flex mt-4 comment-{{ $reply->id }}" id="comment-{{ $reply->id }}">
                                         <div class="d-inline-block mr-2 mb-3 mb-md-0">
                                             <img class="mr-3" src="{{ asset('web/images/post/arrow.png') }}"
                                                 alt="">
@@ -467,6 +481,42 @@
                 $('#cancel-popup').on('click', function() {
                     popup.fadeOut();
                 });
+            }
+        });
+    </script>
+
+    <script>
+        // Function to get URL parameters by name
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the comment ID to highlight from the URL parameter
+            var highlightCommentId = getUrlParameter('highlight_comment_id');
+
+            // If a comment ID is provided, apply highlighting and scroll to the specific comment's column
+            if (highlightCommentId) {
+                // Remove any existing highlighting and fixed-column class
+                var highlightedColumns = document.querySelectorAll('.highlighted-column');
+                highlightedColumns.forEach(function(column) {
+                    column.classList.remove('highlighted-column', 'fixed-column');
+                });
+
+                // Add highlighting to the specific comment's column and the fixed-column class
+                var userColumnToHighlight = document.querySelector('.comment-' + highlightCommentId);
+                if (userColumnToHighlight) {
+                    userColumnToHighlight.classList.add('highlighted-column', 'fixed-column');
+
+                    // Scroll to the highlighted column
+                    userColumnToHighlight.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
             }
         });
     </script>

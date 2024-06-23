@@ -20,7 +20,8 @@
   <link href="{{ asset('dashboard/assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
   <link href="{{ asset('dashboard/assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
   <link href="{{ asset('dashboard/assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
-  <script src="https://js.stripe.com/v3/"></script>
+
+  {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
   
 
   <script>

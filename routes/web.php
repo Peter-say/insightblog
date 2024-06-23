@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BlogCommentController;
 use App\Http\Controllers\Dashboard\BlogPostController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UsersController;
@@ -20,11 +21,11 @@ Route::get('/', [WelcomeController::class, 'welcome']);
 Route::get('search-page', [WelcomeController::class, 'searchPage'])->name('search-page');
 Route::get('search', [WelcomeController::class, 'search'])->name('search');
 Route::get('/category/{name}', [IndexController::class, 'blogByCategory'])->name('category');
-Route::prefix('post')->as('post.')->group(function() {
+Route::prefix('post')->as('post.')->group(function () {
     Route::get('/{slug}/details', [IndexController::class, 'details'])->name('details');
     Route::get('/tag/{tag}', [IndexController::class, 'blogByTags'])->name('tags');
     Route::get('/author', [IndexController::class, 'author'])->name('author');
-   
+
     Route::post('/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
@@ -45,20 +46,24 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::patch('user/{user}/role', [UsersController::class, 'updateRole'])->name('user.role');
 
     // meta description
-  Route::get('/website-meta-description/create', [WebsiteDescription::class, 'create'])->name('website-meta-description.create');
-  Route::post('/website-meta-description', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');
-  Route::get('website-meta-description/{id}', [WebsiteDescription::class, 'edit'])->name('website-meta-description.edit');
-  Route::put('website-meta-description/{id}', [WebsiteDescription::class, 'update'])->name('website-meta-description.update');
-  Route::delete('website-meta-description/{id}', [WebsiteDescription::class, 'destroy'])->name('website-meta-description.destroy');
+    Route::get('/website-meta-description/create', [WebsiteDescription::class, 'create'])->name('website-meta-description.create');
+    Route::post('/website-meta-description', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');
+    Route::get('website-meta-description/{id}', [WebsiteDescription::class, 'edit'])->name('website-meta-description.edit');
+    Route::put('website-meta-description/{id}', [WebsiteDescription::class, 'update'])->name('website-meta-description.update');
+    Route::delete('website-meta-description/{id}', [WebsiteDescription::class, 'destroy'])->name('website-meta-description.destroy');
 
-  Route::get('/website-title/create', [WebsiteDescription::class, 'createMetaTitle'])->name('website-title.create');
-  Route::post('website-title/store', [WebsiteDescription::class, 'storeMetaTitle'])->name('website-title.store');
-  Route::get('website-title/{id}/edit', [WebsiteDescription::class, 'EditMetaTitle'])->name('website-title.edit');
-  Route::put('website-title/{id}/update', [WebsiteDescription::class, 'updateMetaTitle'])->name('website-title.update');
+    Route::get('/website-title/create', [WebsiteDescription::class, 'createMetaTitle'])->name('website-title.create');
+    Route::post('website-title/store', [WebsiteDescription::class, 'storeMetaTitle'])->name('website-title.store');
+    Route::get('website-title/{id}/edit', [WebsiteDescription::class, 'EditMetaTitle'])->name('website-title.edit');
+    Route::put('website-title/{id}/update', [WebsiteDescription::class, 'updateMetaTitle'])->name('website-title.update');
 
-   // settings
-   Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
+    // settings
+    Route::get('/settings', [SettingsController::class, 'settings'])->name('settings');
 
+    Route::resource('comments', BlogCommentController::class);
+    Route::post('/comments/{comment}/approve', [BlogCommentController::class, 'approve'])->name('comments.approve');
+    Route::post('/comments/{comment}/reject', [BlogCommentController::class, 'reject'])->name('comments.reject');
+   
 });
 
 Route::middleware('auth')->group(function () {
