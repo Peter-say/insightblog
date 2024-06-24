@@ -26,7 +26,7 @@
                                         @if ($comment->status == 'pending')
                                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#approveModal{{ $comment->id }}">Approve</button>
                                         @endif
-                                        @if(Auth::user() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'Moderator' || Auth::user() === $comment->post->user_id))
+                                        @if(Auth::user() && (Auth::user()->role === 'Admin' || Auth::user()->role === 'Moderator' || Auth::user()->id === $comment->post->user_id))
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#rejectModal{{ $comment->id }}">Reject</button>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal{{ $comment->id }}">Edit</button>
                                         <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#deleteModal{{ $comment->id }}">Delete</button>

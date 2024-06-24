@@ -232,7 +232,9 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
-
+@if ($blogs)
+    
+@endif
                     @foreach ($blogs as $blog)
                         <article class="card mb-4">
                             <div class="post-slider">

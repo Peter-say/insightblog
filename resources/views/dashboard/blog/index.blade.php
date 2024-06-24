@@ -5,9 +5,9 @@
         <div class="card-header border-bottom">
             <div class="row flex-between-end">
                 <h4> Blog List</h4>
-               <div class="d-flex justify-content-end">
-                <a href="{{route('dashboard.blog.create')}}" class="btn btn-primary btn-sm">Add New</a>
-               </div>
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('dashboard.blog.create') }}" class="btn btn-primary btn-sm">Add New</a>
+                </div>
             </div>
         </div>
         <div class="card-body pt-0">
@@ -16,7 +16,7 @@
                     aria-labelledby="tab-dom-59132dfe-b653-4a39-8aa6-28f8c9a8d67d"
                     id="dom-59132dfe-b653-4a39-8aa6-28f8c9a8d67d">
                     <div class="d-flex justify-content-around text-center mb-3">
-                        <div class="col-6">
+                        <div class="col-xl-6 col-sm-12">
                             <div class="form-group">
                                 <label for="search_blogs">Search by category, title, or body</label>
                                 <input class="form-control" type="text" name="search_blogs" id="search_blogs"
@@ -55,7 +55,8 @@
                                             </td>
                                             <td class="text-nowrap">{{ $blog->category->name }}</td>
                                             <td class="text-nowrap">{{ $blog->title }}</td>
-                                            <td class="text-nowrap">{{ Str::limit(html_entity_decode(strip_tags($blog->body)), 50) }}</td>
+                                            <td class="text-nowrap">
+                                                {{ Str::limit(html_entity_decode(strip_tags($blog->body)), 50) }}</td>
 
                                             <td class="text-nowrap">
                                                 {{ $blog->published_at ?? 'N/A' }}</td>
@@ -95,7 +96,8 @@
                                                 action="{{ route('dashboard.blog.destroy', $blog->id) }}" method="post">
                                                 @csrf @method('DELETE')
                                             </form>
-                                            <a href="javascript:void(0);" onclick="confirmDelete({{ $blog->id }})"><i class="fa fa-trash"></i></a>
+                                            <a href="javascript:void(0);" onclick="confirmDelete({{ $blog->id }})"><i
+                                                    class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                     </tr>
@@ -131,6 +133,25 @@
             document.querySelectorAll('form').forEach(form => {
                 form.addEventListener('change', function() {
                     this.submit();
+                });
+            });
+
+            $('#search_blogs').on('input', function() {
+                let searchValue = $(this).val();
+               
+                $.ajax({
+                    url: '{{ route('dashboard.search.blogs') }}',
+                    method: 'GET',
+                    data: {
+                        search_blogs: searchValue
+                    },
+                    success: function(response) {
+                        $('#blogs-table').html(response.html);
+                    },
+                   
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
                 });
             });
         });
