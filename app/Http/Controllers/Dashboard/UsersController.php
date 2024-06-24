@@ -7,6 +7,7 @@ use App\Helpers\FileHelpers;
 use App\Http\Controllers\Controller;
 use App\Mail\UserLoginDetailsMail;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -97,4 +98,17 @@ class UsersController extends Controller
             return redirect()->back()->with('error_message', 'An error occurred while updating the user.'. $e->getMessage());
         }
     }
+
+    public function verifyEmail(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+
+    if ($request->has('email_verified')) {
+        $user->email_verified_at = $request->input('email_verified') ? Carbon::now() : null;
+    }
+
+    $user->save();
+
+    return redirect()->back()->with('success_message', 'User email verification status updated successfully.');
+}
 }

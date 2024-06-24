@@ -47,6 +47,8 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::delete('user/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::patch('user/{user}/role', [UsersController::class, 'updateRole'])->name('user.role');
     Route::post('/user/send-login-details/{userId}', [UsersController::class, 'sendLoginDetails'])->name('user.send-login-details');
+    Route::patch('/user/{id}/verify-email', [UsersController::class, 'verifyEmail'])->name('user.verify-email');
+
     // meta description
     Route::get('/website-meta-description/create', [WebsiteDescription::class, 'create'])->name('website-meta-description.create');
     Route::post('/website-meta-description', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');

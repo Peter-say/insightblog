@@ -1,5 +1,19 @@
 @extends('dashboard.layouts.app')
+<style>
+    .inline-actions {
+    display: flex;
+    align-items: center;
+}
 
+.inline-actions form,
+.inline-actions a {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.inline-actions .form-check {
+    margin-bottom: 0; /* Override Bootstrap's mb-2 if needed */
+}
+</style>
 @section('contents')
     <div class="card mb-3">
         <div class="card-header border-bottom">
@@ -71,21 +85,29 @@
                                             <td class="text-nowrap">{{ $user->blogs->count() }} </td>
                                             <td>
                                                 @if ($user->role !== 'Admin')
-                                                    <div class="d-flex flex-column align-items-start">
+                                                    <div class="inline-actions">
+                                                        <!-- Verify Email Checkbox -->
+                                                        <form action="{{ route('dashboard.user.verify-email', $user->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" name="email_verified" id="email_verified_{{ $user->id }}" {{ $user->email_verified_at ? 'checked' : '' }} onchange="this.form.submit()">
+                                                                <label class="form-check-label" for="email_verified_{{ $user->id }}">Verify Email</label>
+                                                            </div>
+                                                        </form>
                                                         <!-- Resend Login Details Button -->
-                                                        <form action="{{ route('dashboard.user.send-login-details', ['userId' => $user->id]) }}" method="POST" class="mb-2">
+                                                        <form action="{{ route('dashboard.user.send-login-details', ['userId' => $user->id]) }}" method="POST">
                                                             @csrf
                                                             <button type="submit" class="btn btn-dark btn-sm">Resend Login Details</button>
                                                         </form>
-                                            
                                                         <!-- Delete User Icon -->
-                                                        <form id="delete-user-form-{{ $user->id }}" action="{{ route('dashboard.user.destroy', $user->id) }}" method="POST" class="d-inline-block mb-2">
+                                                        <form id="delete-user-form-{{ $user->id }}" action="{{ route('dashboard.user.destroy', $user->id) }}" method="POST" class="d-inline-block">
                                                             @csrf
                                                             @method('DELETE')
+                                                            <a href="javascript:void(0);" onclick="confirmDelete({{ $user->id }})" class="text-danger">
+                                                                <i class="fa fa-trash"></i> Delete
+                                                            </a>
                                                         </form>
-                                                        <a href="javascript:void(0);" onclick="confirmDelete({{ $user->id }})" class="text-danger">
-                                                            <i class="fa fa-trash"></i> Delete
-                                                        </a>
                                                     </div>
                                                 @endif
                                             </td>
