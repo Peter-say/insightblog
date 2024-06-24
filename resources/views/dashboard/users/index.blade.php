@@ -6,7 +6,7 @@
             <div class="row flex-between-end">
                 <h4> User List</h4>
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="btn btn-primary btn-sm">Add New</a>
+                    <a href="{{ route('dashboard.user.create') }}" class="btn btn-primary btn-sm">Add New</a>
                 </div>
             </div>
         </div>
@@ -71,26 +71,30 @@
                                             <td class="text-nowrap">{{ $user->blogs->count() }} </td>
                                             <td>
                                                 @if ($user->role !== 'Admin')
-                                                    <div class="d-flex justify-content-between">
-                                                        <form id="delete-user-form-{{ $user->id }}"
-                                                            action="{{ route('dashboard.user.destroy', $user->id) }}"
-                                                            method="POST">
+                                                    <div class="d-flex flex-column align-items-start">
+                                                        <!-- Resend Login Details Button -->
+                                                        <form action="{{ route('dashboard.user.send-login-details', ['userId' => $user->id]) }}" method="POST" class="mb-2">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-dark btn-sm">Resend Login Details</button>
+                                                        </form>
+                                            
+                                                        <!-- Delete User Icon -->
+                                                        <form id="delete-user-form-{{ $user->id }}" action="{{ route('dashboard.user.destroy', $user->id) }}" method="POST" class="d-inline-block mb-2">
                                                             @csrf
                                                             @method('DELETE')
                                                         </form>
-                                                        {{-- <a href="{{ route('dashboard.user.edit', $user->id) }}"><i class="fa fa-edit"></i></a> --}}
-                                                        <a href="javascript:void(0);"
-                                                            onclick="confirmDelete({{ $user->id }})"><i
-                                                                class="fa fa-trash"></i></a>
+                                                        <a href="javascript:void(0);" onclick="confirmDelete({{ $user->id }})" class="text-danger">
+                                                            <i class="fa fa-trash"></i> Delete
+                                                        </a>
                                                     </div>
                                                 @endif
-
                                             </td>
+                                            
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="12">
+                                        <td colspan="6">
                                             <h4>No user(s) available</h4>
                                         </td>
                                     </tr>

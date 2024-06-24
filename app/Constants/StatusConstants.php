@@ -2,6 +2,8 @@
 
 namespace App\Constants;
 
+use PharIo\Manifest\Author;
+
 class StatusConstants
 {
     const ACTIVE = 'Active';
@@ -96,9 +98,11 @@ class StatusConstants
     const ADMIN = 'Admin';
     const MODERATOR = 'Moderator';
     const USER = 'User';
+    const AUTHOR = 'Author';
 
     const USERS_ROLE = [
         self::ADMIN => 'Admin',
+        self::AUTHOR => 'Author',
         self::MODERATOR => 'Moderator',
         self::USER => 'User',
     ];

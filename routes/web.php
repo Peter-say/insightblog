@@ -42,9 +42,11 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::put('/blog/{id}/update-featured', [BlogPostController::class, 'updateFeatured'])->name('blog.featured');
 
     Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::get('user/create', [UsersController::class, 'create'])->name('user.create');
+    Route::post('user/store', [UsersController::class, 'store'])->name('user.store');
     Route::delete('user/destroy/{id}', [UsersController::class, 'destroy'])->name('user.destroy');
     Route::patch('user/{user}/role', [UsersController::class, 'updateRole'])->name('user.role');
-
+    Route::post('/user/send-login-details/{userId}', [UsersController::class, 'sendLoginDetails'])->name('user.send-login-details');
     // meta description
     Route::get('/website-meta-description/create', [WebsiteDescription::class, 'create'])->name('website-meta-description.create');
     Route::post('/website-meta-description', [WebsiteDescription::class, 'store'])->name('website-meta-description.store');

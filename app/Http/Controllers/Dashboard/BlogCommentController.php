@@ -58,7 +58,7 @@ class BlogCommentController extends Controller
     {
         $comment = BlogComment::findOrFail($id);
         $comment->update($request->only('body'));
-        return back()->with('success', 'Comment updated successfully.');
+        return back()->with('success_message', 'Comment updated successfully.');
     }
 
     /**
