@@ -92,7 +92,7 @@ class UsersController extends Controller
 
             Mail::to($user->email)->send(new UserLoginDetailsMail($user, $randomPassword));
 
-            return back()->with('success_message', 'Login resent Successfully');
+            return back()->with('success_message', 'Login details resent Successfully');
         } catch (Exception  $e) {
             return redirect()->back()->with('error_message', 'An error occurred while updating the user.'. $e->getMessage());
         }

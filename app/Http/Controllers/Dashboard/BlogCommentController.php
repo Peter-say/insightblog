@@ -13,8 +13,10 @@ class BlogCommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(BlogComment $comment)
     {
+        $this->authorize('view', $comment);
+
         $comments = BlogComment::all();
         return view('dashboard.comment', compact('comments'));
     }

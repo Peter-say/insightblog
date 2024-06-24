@@ -41,12 +41,21 @@
             text-decoration: none;
             border-radius: 4px;
         }
+        .btn-login {
+            background-color: #28a745;
+            margin-top: 20px;
+        }
+        .regards {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to Your Application</h1>
-        <p>Hello {{ $user->first_name }},</p>
+        <p>Hello {{ $user->name }},</p>
         <p>Your account has been created. Here are your login details:</p>
         <ul>
             <li><strong>Email:</strong> {{ $user->email }}</li>
@@ -54,7 +63,9 @@
         </ul>
         <p>You can log in to your account using the provided credentials.</p>
         <p>Thank you for joining us!</p>
-        <p>If you have any questions or need assistance, please feel free to <a class="btn" href="{{route('web.contact-us')}}">contact us</a>.</p>
+        <p>If you have any questions or need assistance, please feel free to <a href="#">contact us</a>.</p>
+        <a class="btn btn-login" href="{{ config('app.url') . '/login' }}">Login to Your Account</a>
+        <p class="regards">Regards,<br>{{ config('app.name') }}</p>
     </div>
 </body>
 </html>

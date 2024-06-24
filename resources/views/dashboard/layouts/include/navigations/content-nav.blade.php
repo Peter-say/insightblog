@@ -443,7 +443,7 @@
                     <a class="dropdown-item" href="{{route('profile.edit')}}">Profile &amp; account</a>
                     <a class="dropdown-item" href="#!">Feedback</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../../../pages/user/settings.html">Settings</a>
+                    <a class="dropdown-item" href="{{route('profile.edit')}}">Settings</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
