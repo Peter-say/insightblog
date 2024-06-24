@@ -128,7 +128,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <p>{{ Str::limit($featuredPost->body, 150) }}</p>
+                                <p>{!! html_entity_decode( Str::limit($featuredPost->body, 150)) !!}</p>
                                 <a href="{{ route('post.details', $featuredPost->slug) }}"
                                     class="btn btn-outline-primary">Read More</a>
                             </div>
@@ -280,7 +280,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <p>{{ Str::limit($blog->body, 150) }}</p>
+                                <p>{!! html_entity_decode( Str::limit($blog->body, 150)) !!}</p>
                                 <a href="{{ route('post.details', $blog->slug) }}" class="btn btn-outline-primary">Read
                                     More</a>
                             </div>
