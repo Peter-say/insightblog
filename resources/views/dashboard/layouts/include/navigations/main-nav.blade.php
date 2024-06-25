@@ -60,6 +60,14 @@
                                 </div>
                             </a>
                         @endcan
+                        @can('manage-blogs')
+                        <!-- parent pages--><a class="nav-link" href="{{ route('dashboard.stats') }}"
+                            role="button">
+                            <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                        class="fab fa-trello"></span></span><span class="nav-link-text ps-1">stats</span>
+                            </div>
+                        </a>
+                    @endcan
                         <!-- parent pages-->
                         @can('manage-comments')
                             <!-- parent pages--><a class="nav-link" href="{{route('dashboard.comments.index')}}" role="button">

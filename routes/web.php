@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\Dashboard\MetaDescription;
 use App\Http\Controllers\Dashboard\SettingsController;
+use App\Http\Controllers\Dashboard\StatsController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\CommentController;
@@ -68,6 +69,8 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::post('/comments/{comment}/approve', [BlogCommentController::class, 'approve'])->name('comments.approve');
     Route::post('/comments/{comment}/reject', [BlogCommentController::class, 'reject'])->name('comments.reject');
    
+    Route::get('/stats', [StatsController::class, 'index'])->name('stats');
+    Route::get('/load-more-posts', [StatsController::class, 'loadMorePosts'])->name('load-more-posts');
 });
 
 Route::middleware('auth')->group(function () {
