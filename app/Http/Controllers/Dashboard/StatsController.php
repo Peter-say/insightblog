@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogComment;
 use App\Models\BlogPost;
 use App\Models\ViewCount;
 use Carbon\Carbon;
@@ -29,15 +30,20 @@ class StatsController extends Controller
         $thisMonthViews = ViewCount::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
         $lastMonthViews = ViewCount::whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])->count();
     
+        $totalComments = BlogComment::count();
+        $totalPosts = BlogPost::count();
+
         $posts = BlogPost::where('status', 'active')->orderBy('view_count', 'desc')->take(5)
         ->get();
         $latestPost = BlogPost::orderBy('created_at', 'desc')->first();
-        return view('dashboard.stats', [
+        return view('dashboard.stats.index', [
             'allTimeViews' => $allTimeViews,
             'todayViews' => $todayViews,
             'yesterdayViews' => $yesterdayViews,
             'thisMonthViews' => $thisMonthViews,
             'lastMonthViews' => $lastMonthViews,
+            'totalComments' => $totalComments,
+            'totalPosts' => $totalPosts,
             'latestPost' => $latestPost,
             'posts' => $posts,
         ]);
@@ -52,7 +58,7 @@ class StatsController extends Controller
             ->take(5)
             ->get();
 
-        $html = view('dashboard.stats', compact('posts'))->render();
+        $html = view('dashboard.stats.load-more-post', compact('posts'))->render();
         $hasMore = BlogPost::where('status', 'active')->count() > $page * 5;
 
         return response()->json(['html' => $html, 'hasMore' => $hasMore]);
