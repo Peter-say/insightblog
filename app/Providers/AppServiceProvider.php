@@ -58,7 +58,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Fetch categories from the database
         $categories = BlogCategory::all();
-        $navs = NavigationLink::whereNull('parent_id')->with('children')->get();
+      if (Schema::hasTable('navigation_links')) {
+        $navs = NavigationLink::where('parent_id', null)->get();
+    }
         // Share $categories with all views
         View::share(['categories' => $categories, 'navs' => $navs]);
     }
