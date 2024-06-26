@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\BlogPostController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\Dashboard\MetaDescription;
+use App\Http\Controllers\Dashboard\NavigationLinkController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\StatsController;
 use App\Http\Controllers\Dashboard\WebsiteDescription;
@@ -68,9 +69,11 @@ Route::prefix('dashboard')->as('dashboard.')->middleware(['auth', 'verified'])->
     Route::resource('comments', BlogCommentController::class);
     Route::post('/comments/{comment}/approve', [BlogCommentController::class, 'approve'])->name('comments.approve');
     Route::post('/comments/{comment}/reject', [BlogCommentController::class, 'reject'])->name('comments.reject');
-   
+
     Route::get('/stats', [StatsController::class, 'index'])->name('stats');
     Route::get('/load-more-posts', [StatsController::class, 'loadMorePosts'])->name('load-more-posts');
+
+    Route::resource('navigation-links', NavigationLinkController::class)->except(['create', 'show']);
 });
 
 Route::middleware('auth')->group(function () {

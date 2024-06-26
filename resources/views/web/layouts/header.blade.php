@@ -10,60 +10,47 @@
                   <ul class="navbar-nav mx-auto">
                       <li class="nav-item dropdown">
                           <a class="nav-link" href="/">Homepage</a>
-
                       </li>
-                      <li class="nav-item dropdown">
+
+                      {{-- <li class="nav-item dropdown">
                           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                               aria-expanded="false">
                               About <i class="ti-angle-down ml-1"></i>
                           </a>
-                          <div class="dropdown-menu">
-
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="#">About Me</a>
-
                               <a class="dropdown-item" href="#">About Us</a>
-
                           </div>
-                      </li>
-
+                      </li> --}}
+                      <ul class="navbar-nav mx-auto">
+                        @foreach ($navs as $nav)
+                            @if ($nav->children && $nav->children->count() > 0)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{$nav->url}}" role="button" data-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false">
+                                       {{ $nav->text }} <i class="ti-angle-down ml-1"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @foreach ($nav->children as $child)
+                                            <a class="dropdown-item" href="{{ $child->url }}">{{ $child->text }}</a>
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @elseif (!$nav->parent_id)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $nav->url }}">{{ $nav->text }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                    
+{{--                     
                       <li class="nav-item">
                           <a class="nav-link" href="#">Contact</a>
                       </li>
-
-                      {{-- <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">Pages <i class="ti-angle-down ml-1"></i>
-              </a>
-              <div class="dropdown-menu">
-                
-                <a class="dropdown-item" href="author.html">Author</a>
-                
-                <a class="dropdown-item" href="author-single.html">Author Single</a>
-  
-                <a class="dropdown-item" href="advertise.html">Advertise</a>
-                
-                <a class="dropdown-item" href="post-details.html">Post Details</a>
-                
-                <a class="dropdown-item" href="post-elements.html">Post Elements</a>
-                
-                <a class="dropdown-item" href="tags.html">Tags</a>
-  
-                <a class="dropdown-item" href="search-result.html">Search Result</a>
-  
-                <a class="dropdown-item" href="search-not-found.html">Search Not Found</a>
-                
-                <a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a>
-                
-                <a class="dropdown-item" href="terms-conditions.html">Terms Conditions</a>
-  
-                <a class="dropdown-item" href="404.html">404 Page</a>
-                
-              </div>
-            </li> --}}
-
                       <li class="nav-item">
                           <a class="nav-link" href="/">Blog</a>
-                      </li>
+                      </li> --}}
                   </ul>
                   @if (Auth::check())
                       <a href="{{ route('dashboard.home') }}" class="btn btn-sm btn-primary">Dashboard</a>
@@ -72,15 +59,18 @@
                   @endif
               </div>
 
+
+
               <div class="order-2 order-lg-3 d-flex align-items-center">
-                  <select class="m-2 border-0 bg-transparent" id="select-language">
+                  {{-- <select class="m-2 border-0 bg-transparent" id="select-language">
                       <option id="en" value="" selected>En</option>
                       <option id="fr" value="">Fr</option>
-                  </select>
+                  </select> --}}
 
                   <!-- search -->
                   <form class="search-bar">
-                     <a href="{{route('search-page')}}"> <input  type="search" placeholder="Type &amp; Hit Enter..."></a>
+                      <a href="{{ route('search-page') }}"> <input type="search"
+                              placeholder="Type &amp; Hit Enter..."></a>
                   </form>
 
                   <button class="navbar-toggler border-0 order-1" type="button" data-toggle="collapse"
@@ -93,3 +83,26 @@
       </div>
   </header>
   <!-- /navigation -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      // Script to activate hover dropdown
+      $(document).ready(function() {
+          // Dropdown hover for statically and dynamically added items
+          $('.nav-item.dropdown').hover(function() {
+              $(this).addClass('show'); // Show dropdown on hover
+              $(this).find('.dropdown-menu').addClass('show');
+          }, function() {
+              $(this).removeClass('show'); // Hide dropdown when not hovering
+              $(this).find('.dropdown-menu').removeClass('show');
+          });
+
+          // Close dropdowns on click outside
+          $(document).click(function(e) {
+              if (!$(e.target).closest('.nav-item.dropdown').length) {
+                  $('.nav-item.dropdown').removeClass('show');
+                  $('.nav-item.dropdown').find('.dropdown-menu').removeClass('show');
+              }
+          });
+      });
+  </script>

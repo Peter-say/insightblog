@@ -8,7 +8,7 @@
         <form action="{{route('dashboard.website-title.store')}}" method="post">
             @csrf
             <div class="form-group">
-                <input class="form-control @error('meta_title') is-invalid @enderror" name="meta_title" id="" />
+                <input class="form-control @error('meta_title') is-invalid @enderror" name="meta_title" value="{{config('app.name')}}" id="" />
                 @error('meta_title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

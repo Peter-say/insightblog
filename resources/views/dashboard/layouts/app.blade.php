@@ -7,6 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
     @include('dashboard.layouts.head.meta-data')
     @include('components.head.tinymce-config')

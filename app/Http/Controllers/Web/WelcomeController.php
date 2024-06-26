@@ -14,6 +14,7 @@ class WelcomeController extends Controller
     public function welcome()
     {
         $metaData = PageMetaData::welcome();
+     
         // Get all active blog posts with their cametaDatategory, ordered by creation date
         $blogs = BlogPost::with('category')->where('status', 'active')->orderBy('created_at', 'desc')->paginate(5);
 

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\NavigationLink;
 use App\Models\User;
 use App\Policies\BlogCommentPolicy;
 use App\Policies\BlogPostPolicy;
@@ -57,7 +58,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Fetch categories from the database
         $categories = BlogCategory::all();
+        $navs = NavigationLink::whereNull('parent_id')->with('children')->get();
         // Share $categories with all views
-        View::share('categories', $categories);
+        View::share(['categories' => $categories, 'navs' => $navs]);
     }
 }

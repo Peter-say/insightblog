@@ -14,7 +14,7 @@ class WebsiteMetaTitle extends Model
 
     public function appName()
     {
-        return $this->meta_title;
+        return $this;
     }
 
 }

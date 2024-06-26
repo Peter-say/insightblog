@@ -19,8 +19,8 @@ class ViewCountFactory extends Factory
         $faker = \Faker\Factory::create();
         return [
             // 'week' => $faker->unique()->numberBetween(1, 52), // Assuming 'week' is a field representing the week number
-            'blog_post_id' => $faker->numberBetween(100, 1000), // Random views count
-            'created_at' => $faker->dateTimeBetween('-7 days', 'now'), // Date within the past 7 days
+            // 'blog_post_id' => $faker->numberBetween(100, 1000), // Random views count
+            // 'created_at' => $faker->dateTimeBetween('-7 days', 'now'), // Date within the past 7 days
         ];
     }
 }
