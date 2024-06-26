@@ -56,13 +56,19 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
+        // Check if the navigation_links table exists before fetching data
+        if (Schema::hasTable('navigation_links')) {
+            // Fetch navigation links from the database
+            $navs = NavigationLink::where('parent_id', null)->get();
+        } else {
+            // Set $navs to an empty collection or array if the table does not exist
+            $navs = collect(); // or use $navs = [];
+        }
+
         // Fetch categories from the database
         $categories = BlogCategory::all();
-        if (Schema::hasTable('navigation_links')) {
-            $navs = NavigationLink::where('parent_id', null)->get();
-            View::share(['categories' => $categories, 'navs' => $navs]);
-        }
-        // Share $categories with all views
+
+        // Share $categories and $navs with all views
         View::share(['categories' => $categories, 'navs' => $navs]);
     }
 }
