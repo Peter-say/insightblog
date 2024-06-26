@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         $this->policies;
-        
+
         Gate::define('manage-users', function (User $user) {
             return $user->isAdmin() || $user->isModerator();
         });
@@ -58,9 +58,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Fetch categories from the database
         $categories = BlogCategory::all();
-      if (Schema::hasTable('navigation_links')) {
-        $navs = NavigationLink::where('parent_id', null)->get();
-    }
+        if (Schema::hasTable('navigation_links')) {
+            $navs = NavigationLink::where('parent_id', null)->get();
+            View::share(['categories' => $categories, 'navs' => $navs]);
+        }
         // Share $categories with all views
         View::share(['categories' => $categories, 'navs' => $navs]);
     }
