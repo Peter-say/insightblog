@@ -1,18 +1,20 @@
 @extends('dashboard.layouts.app')
 <style>
     .inline-actions {
-    display: flex;
-    align-items: center;
-}
+        display: flex;
+        align-items: center;
+    }
 
-.inline-actions form,
-.inline-actions a {
-    margin-right: 10px; /* Adjust as needed */
-}
+    .inline-actions form,
+    .inline-actions a {
+        margin-right: 10px;
+        /* Adjust as needed */
+    }
 
-.inline-actions .form-check {
-    margin-bottom: 0; /* Override Bootstrap's mb-2 if needed */
-}
+    .inline-actions .form-check {
+        margin-bottom: 0;
+        /* Override Bootstrap's mb-2 if needed */
+    }
 </style>
 @section('contents')
     <div class="card mb-3">
@@ -35,6 +37,7 @@
                                     <th class="text-nowrap">Full Name</th>
                                     <th class="text-nowrap">Email</th>
                                     <th class="text-nowrap">Role</th>
+                                    <th></th>
                                     <th class="text-nowrap">Blog Count</th>
                                     <th class="text-nowrap">Actions</th>
                                 </tr>
@@ -60,7 +63,7 @@
                                             </td>
                                             <td class="text-nowrap">{{ $user->name }}</td>
                                             <td class="text-nowrap">{{ $user->email }}</td>
-
+                                            <td class="text-nowrap">{{ $user->role }}</td>
 
                                             <td class="text-nowrap">
                                                 <form action="{{ route('dashboard.user.role', $user->id) }}" method="POST">
@@ -68,8 +71,11 @@
                                                     @method('PATCH')
                                                     <select name="role" class="form-select" onchange="this.form.submit()"
                                                         {{ $user->role == 'Admin' ? 'disabled' : '' }}>
-                                                        <option value="Admin"
-                                                            {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                                        @if (Auth::user()->role == 'Admin')
+                                                            <option value="Admin"
+                                                                {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin
+                                                            </option>
+                                                        @endif
                                                         <option value="Moderator"
                                                             {{ $user->role == 'Moderator' ? 'selected' : '' }}>Moderator
                                                         </option>
@@ -87,31 +93,46 @@
                                                 @if ($user->role !== 'Admin')
                                                     <div class="inline-actions">
                                                         <!-- Verify Email Checkbox -->
-                                                        <form action="{{ route('dashboard.user.verify-email', $user->id) }}" method="POST">
+                                                        <form
+                                                            action="{{ route('dashboard.user.verify-email', $user->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PATCH')
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input" name="email_verified" id="email_verified_{{ $user->id }}" {{ $user->email_verified_at ? 'checked' : '' }} onchange="this.form.submit()">
-                                                                <label class="form-check-label" for="email_verified_{{ $user->id }}">Verify Email</label>
+                                                                <input type="checkbox" class="form-check-input"
+                                                                    name="email_verified"
+                                                                    id="email_verified_{{ $user->id }}"
+                                                                    {{ $user->email_verified_at ? 'checked' : '' }}
+                                                                    onchange="this.form.submit()">
+                                                                <label class="form-check-label"
+                                                                    for="email_verified_{{ $user->id }}">Verify
+                                                                    Email</label>
                                                             </div>
                                                         </form>
                                                         <!-- Resend Login Details Button -->
-                                                        <form action="{{ route('dashboard.user.send-login-details', ['userId' => $user->id]) }}" method="POST">
+                                                        <form
+                                                            action="{{ route('dashboard.user.send-login-details', ['userId' => $user->id]) }}"
+                                                            method="POST">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-dark btn-sm">Resend Login Details</button>
+                                                            <button type="submit" class="btn btn-dark btn-sm">Resend Login
+                                                                Details</button>
                                                         </form>
                                                         <!-- Delete User Icon -->
-                                                        <form id="delete-user-form-{{ $user->id }}" action="{{ route('dashboard.user.destroy', $user->id) }}" method="POST" class="d-inline-block">
+                                                        <form id="delete-user-form-{{ $user->id }}"
+                                                            action="{{ route('dashboard.user.destroy', $user->id) }}"
+                                                            method="POST" class="d-inline-block">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="javascript:void(0);" onclick="confirmDelete({{ $user->id }})" class="text-danger">
+                                                            <a href="javascript:void(0);"
+                                                                onclick="confirmDelete({{ $user->id }})"
+                                                                class="text-danger">
                                                                 <i class="fa fa-trash"></i> Delete
                                                             </a>
                                                         </form>
                                                     </div>
                                                 @endif
                                             </td>
-                                            
+
                                         </tr>
                                     @endforeach
                                 @else

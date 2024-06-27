@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
+        $this->authorize('view', $user);
         $users = User::paginate(30);
         return view('dashboard.users.index', ['users'=> $users]);
     }

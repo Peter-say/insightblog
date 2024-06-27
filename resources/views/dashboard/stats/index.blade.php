@@ -94,12 +94,12 @@
                     <div class="card stats-card">
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-6 col-md">
+                                <div class=" col-xl-6 col-md-6 col-sm-5">
                                     <h5><a href="{{ route('dashboard.blog.index') }}"><i class="fa fa-file-alt"></i>
                                             Posts</a></h5>
                                     <p class="h4">{{ $totalPosts }}</p>
                                 </div>
-                                <div class="col-6 col-md">
+                                <div class=" col-xl-6 col-md-6 col-sm-7">
                                     <h5><a href="{{ route('dashboard.comments.index') }}"><i class="fa fa-comment"></i>
                                             Comments</a></h5>
                                     <p class="h4">{{ $totalComments }}</p>

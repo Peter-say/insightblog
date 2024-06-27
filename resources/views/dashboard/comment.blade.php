@@ -1,5 +1,20 @@
 @extends('dashboard.layouts.app')
 
+<style>
+     .highlighted-column {
+        background-color:rgba(240, 235, 235, 0.959);
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .fixed-column {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+    }
+</style>
+
 @section('contents')
     <div class="container-fluid mb-5">
         <div class="row justify-content-center">
@@ -8,7 +23,7 @@
                     <div class="card-header">Manage Comments</div>
                     <div class="card-body">
                         @foreach ($comments as $comment)
-                            <div class="media mb-4">
+                            <div class="media mb-4 comment-{{ $comment->id }}">
                                 <img class="mr-3 rounded-circle" src="https://via.placeholder.com/50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">{{ $comment->commenter_name }}</h5>
@@ -146,4 +161,39 @@
             </div>
         </div>
     </div>
+    <script>
+        // Function to get URL parameters by name
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the comment ID to highlight from the URL parameter
+            var highlightCommentId = getUrlParameter('highlight_comment_id');
+
+            // If a comment ID is provided, apply highlighting and scroll to the specific comment's column
+            if (highlightCommentId) {
+                // Remove any existing highlighting and fixed-column class
+                var highlightedColumns = document.querySelectorAll('.highlighted-column');
+                highlightedColumns.forEach(function(column) {
+                    column.classList.remove('highlighted-column', 'fixed-column');
+                });
+
+                // Add highlighting to the specific comment's column and the fixed-column class
+                var userColumnToHighlight = document.querySelector('.comment-' + highlightCommentId);
+                if (userColumnToHighlight) {
+                    userColumnToHighlight.classList.add('highlighted-column', 'fixed-column');
+
+                    // Scroll to the highlighted column
+                    userColumnToHighlight.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+    </script>
 @endsection

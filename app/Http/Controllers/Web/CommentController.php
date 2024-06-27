@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\CommentSubmitted;
 use App\Http\Controllers\Controller;
+use App\Mail\CommentSubmittedMail;
 use App\Models\BlogComment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
@@ -60,7 +64,18 @@ class CommentController extends Controller
             ]);
 
             $comment->load('replies');
+            // Dispatch the event when a comment is submitted
+            event(new CommentSubmitted($comment));
 
+            // Send email notification to the admin
+            $adminUsers = User::where('role', 'Admin')->get();
+            foreach ($adminUsers as $admin) {
+                Mail::to($admin->email)->send(new CommentSubmittedMail($admin, $comment));
+            }
+
+            // Send email notification to the author of the blog post
+            $author = $comment->post->user;
+            Mail::to($author->email)->send(new CommentSubmittedMail($author, $comment));
             return response()->json(['success' => true, 'comment' => $comment, 'message' => 'Comment submitted successfully.']);
         } catch (\Exception $e) {
             Log::error('Failed to submit comment: ' . $e->getMessage());

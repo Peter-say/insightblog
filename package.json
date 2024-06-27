@@ -16,6 +16,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^41.4.2"
+        "@ckeditor/ckeditor5-build-classic": "^41.4.2",
+        "laravel-echo": "^1.16.1",
+        "pusher-js": "^8.4.0-rc2"
     }
 }
